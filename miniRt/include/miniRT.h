@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:22:35 by irifarac          #+#    #+#             */
-/*   Updated: 2023/01/27 20:55:56 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/02/03 12:19:16 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,20 @@ typedef struct s_win
 	int	end;
 }	t_window;
 
+typedef struct		s_vect
+{
+	double			x;
+	double			y;
+	double			z;
+}					t_vect;
+
+typedef struct		s_ray
+{
+	double			t;
+	t_vect			pos;
+	t_vect			dir;
+}					p_ray;
+
 //mlx functions
 void		ft_init(t_ambient *amb, t_object *obj);
 void		ft_generate(t_ambient *amb, t_object *obj, t_window *mlx);
@@ -181,5 +195,10 @@ float		ft_coord(char **ftoken, char *eftoken);
 float		ft_normal(char **ftoken, char *eftoken);
 int			ft_fov(char **ftoken, char *eftoken);
 float		ft_diameter(char **ftoken, char *eftoken);
+//Utils list
+t_ambient	*s_lst( t_ambient *ambsearch, int type);
+
+//mainfucntions
+p_ray		set_prim_ray ( t_ambient *amb);
 
 #endif
