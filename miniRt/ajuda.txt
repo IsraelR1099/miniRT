@@ -1,0 +1,4 @@
+https://velog.io/@maindish/miniRT
+https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-ray-tracing/raytracing-algorithm-in-a-nutshell
+https://raytracing.github.io/books/RayTracingInOneWeekend.html#overview
+
