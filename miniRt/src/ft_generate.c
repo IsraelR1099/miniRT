@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:21:31 by irifarac          #+#    #+#             */
-/*   Updated: 2023/02/10 09:33:53 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/02/10 11:58:07 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 	t_colours	colours;
 
 	i = 0;
-	t = 1000;
+	t = 400;
 	len = 0;
 	ft_set_colour(amb, obj, &colours, 6);
 	int k = 0;
@@ -34,14 +34,19 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 		while (j < WIDTH)
 		{
 			//calculate ray direction
-			ray_dir.x = j;
-			ray_dir.y = i;
+			
+			ray_dir.x = j - WIDTH / 2; 
+			ray_dir.y = i - HEIGHT / 2 ;
+			//ray_dir.z = - WIDTH / 2;
 			ray_dir.z = -1 * t;
+			/*
+			ray_dir.x = j - WIDTH / 2;
+			ray_dir.y = i - HEIGHT / 2 ;
+			//ray_dir.z = - WIDTH / 2;
+			ray_dir.z = -1 * t;
+			*/
 			//normalize direction vector
-			len = sqrt(ray_dir.x * ray_dir.x + ray_dir.y * ray_dir.y + ray_dir.z * ray_dir.z);
-			ray_dir.x /= len;
-			ray_dir.y /= len;
-			ray_dir.z /= len;
+			ft_normalize(ray_dir);
 			type = ft_intersects(amb, obj, ray_dir);
 			if (type == sp)
 			{

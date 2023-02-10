@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:05:48 by irifarac          #+#    #+#             */
-/*   Updated: 2023/02/10 09:48:09 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/02/10 10:28:17 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,14 @@ t_vector	ft_rest_vect(t_vector origin, t_vector obj)
 	ret.y = origin.y - obj.y;
 	ret.z = origin.z - obj.z;
 	return (ret);
+}
+t_vector	ft_normalize(t_vector ray_dir)
+{
+	float	len;
+
+	len = sqrt(ft_dot_product_vect(ray_dir, ray_dir));
+	ray_dir.x /= len;
+	ray_dir.y /= len;
+	ray_dir.z /= len;
+	return (ray_dir);
 }

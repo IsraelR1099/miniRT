@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:22:35 by irifarac          #+#    #+#             */
-/*   Updated: 2023/02/10 09:48:32 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/02/10 11:58:43 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,8 @@ typedef struct s_colour
 
 //Intersections
 int			ft_intersects(t_ambient *amb, t_object *obj, t_vector ray_dir);
-int			ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir);
-int			ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir);
+double		ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir);
+double		ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir);
 //mlx functions
 void		ft_init(t_ambient *amb, t_object *obj);
 void		ft_generate(t_ambient *amb, t_object *obj, t_window *mlx);
@@ -210,6 +210,7 @@ t_ambient	*ft_find_lst(t_ambient *amb, int type);
 //Maths functions
 double		ft_dot_product_vect(t_vector vector_left, t_vector vector_right);
 t_vector	ft_rest_vect(t_vector origin, t_vector obj);
+t_vector	ft_normalize(t_vector ray_dir);
 //Colors
 int			ft_set_colour(t_ambient *amb, t_object *obj, t_colours *colours, int type);
 #endif

@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 11:05:21 by irifarac          #+#    #+#             */
-/*   Updated: 2023/02/10 09:34:14 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/02/10 13:15:00 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static double	ft_c_value(t_ambient *amb, t_object *obj)
 	sphere_pos.y = sphere->y;
 	sphere_pos.z = sphere->z;
 	res_cam_sph = ft_rest_vect(cam_pos, sphere_pos);
-	return (ft_dot_product_vect(res_cam_sph, res_cam_sph) - (sphere->diameter / 2));
+	return (ft_dot_product_vect(res_cam_sph, res_cam_sph) - ((sphere->diameter / 2) * (sphere->diameter / 2)));	
 }
 
 static double	ft_calc_t(double scalar_a, double scalar_b, double scalar_c)
@@ -65,14 +65,14 @@ static double	ft_calc_t(double scalar_a, double scalar_b, double scalar_c)
 	double	ret_negative;
 
 	ret = scalar_b * scalar_b - (4 * scalar_a * scalar_c);
-	ret_positive = -scalar_b + sqrt(ret) / 2 * scalar_a;
-	ret_negative = -scalar_b + sqrt(ret) / 2 * scalar_a;
+	ret_positive = (-scalar_b + sqrt(ret)) / (2 * scalar_a);
+	ret_negative = (-scalar_b - sqrt(ret)) / (2 * scalar_a);
 	if (ret_positive == ret_negative)
 		return (0);
 	return (ret_negative);
 }
 
-int	ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir)
+double	ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir)
 {
 	double	scalar_a;
 	double	scalar_b;
@@ -86,8 +86,12 @@ int	ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir)
 	scalar_c = ft_c_value(amb, obj);
 	ret = scalar_b * scalar_b - (4 * scalar_a * scalar_c);
 	if (ret < 0)
-		return (0);
+		return (2);
 	calc_t = ft_calc_t(scalar_a, scalar_b, scalar_c);
-	(void)calc_t;
-	return (1);
+	if (calc_t < 0)
+		calc_t = calc_t * -1;
+	//if (calc_t != 0)
+	//	printf("valor t esfera%f\n",calc_t);;
+	//(void)calc_t;
+	return (calc_t);
 }

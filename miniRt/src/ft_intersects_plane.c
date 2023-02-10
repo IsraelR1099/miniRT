@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:38:13 by irifarac          #+#    #+#             */
-/*   Updated: 2023/02/08 13:53:24 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/02/10 13:15:07 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static double	ft_a_value(t_ambient *amb, t_plane *plane)
 	return (ft_dot_product_vect(normal_plane, res_point_orig));
 }
 
-int	ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir)
+double	ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir)
 {
 	t_vector	normal_plane;
 	t_plane		*plane;
@@ -47,8 +47,11 @@ int	ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir)
 	normal_plane.z = plane->z_normal;
 	ret_b = ft_dot_product_vect(normal_plane, ray_dir);
 	if (ret_b == 0)
-		return (0);
+		return (2);
 	t = ft_a_value(amb, plane) / ret_b;
-	(void)t;
-	return (1);
+	if ( t < 0)
+		t = t * - 1;
+	//printf ("valor t pla %f\n",t);
+	//(void)t;
+	return (t);
 }
