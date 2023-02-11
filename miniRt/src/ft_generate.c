@@ -65,4 +65,5 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 		i++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
+	(void)len;
 }
