@@ -24,7 +24,7 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 	t_colours	colours;
 
 	i = 0;
-	t = 400;
+	t = 300;
 	len = 0;
 	ft_set_colour(amb, obj, &colours, 6);
 	int k = 0;
@@ -34,17 +34,15 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 		while (j < WIDTH)
 		{
 			//calculate ray direction
-			
-			ray_dir.x = j - WIDTH / 2; 
-			ray_dir.y = i - HEIGHT / 2 ;
-			//ray_dir.z = - WIDTH / 2;
+	
+			ray_dir.x = (j- WIDTH / 2) ; 
+			ray_dir.y = (i -HEIGHT /2 ) * (RATIO);
 			ray_dir.z = -1 * t;
-			/*
-			ray_dir.x = j - WIDTH / 2;
-			ray_dir.y = i - HEIGHT / 2 ;
-			//ray_dir.z = - WIDTH / 2;
+	/*
+			ray_dir.x = (2 * ((i + 0.5) / WIDTH) -1) * RATIO;
+			ray_dir.y = (1 - 2 * ((j + 0.5) / HEIGHT));
 			ray_dir.z = -1 * t;
-			*/
+	*/		
 			//normalize direction vector
 			ft_normalize(ray_dir);
 			type = ft_intersects(amb, obj, ray_dir);

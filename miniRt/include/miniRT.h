@@ -22,7 +22,7 @@
 # define BUFFER_SIZE 1
 # define WIDTH 1080
 # define HEIGHT 720
-
+# define RATIO	0.96
 enum	e_ident
 {
 	A,
