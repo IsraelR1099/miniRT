@@ -46,3 +46,8 @@ t_vector	ft_normalize(t_vector ray_dir)
 	ray_dir.z /= len;
 	return (ray_dir);
 }
+t_vector	mul(t_vector a, float b) 
+{
+	t_vector  result = {a.x * b, a.y * b, a.z * b};
+	return result;
+}

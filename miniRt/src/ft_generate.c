@@ -28,17 +28,30 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 	len = 0;
 	ft_set_colour(amb, obj, &colours, 6);
 	int k = 0;
+	(void)t;
 	while (i < HEIGHT)
 	{
 		j = 0;
 		while (j < WIDTH)
 		{
 			//calculate ray direction
+
+			ray_dir.x = (j- WIDTH / 2) ; 
+			ray_dir.y = (i -HEIGHT /2 ) * (RATIO);
+			ray_dir.z = -1 * t;
+			/*
+			ray_dir.x = (2 * (j + 0.5) / WIDTH - 1) * RATIO;
+        		ray_dir.y = 1 - 2 * (i + 0.5) / HEIGHT;
+			ray_dir.z = -1 *t;
+	
+			ray_dir.x = (j / WIDTH  -0.5); 
+			ray_dir.y = (i / HEIGHT -0.5);
+			ray_dir.z = -1 * t;
 	
 			ray_dir.x = (j- WIDTH / 2) ; 
 			ray_dir.y = (i -HEIGHT /2 ) * (RATIO);
 			ray_dir.z = -1 * t;
-	/*
+	
 			ray_dir.x = (2 * ((i + 0.5) / WIDTH) -1) * RATIO;
 			ray_dir.y = (1 - 2 * ((j + 0.5) / HEIGHT));
 			ray_dir.z = -1 * t;
