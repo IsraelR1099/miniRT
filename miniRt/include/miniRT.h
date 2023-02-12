@@ -212,6 +212,7 @@ double		ft_dot_product_vect(t_vector vector_left, t_vector vector_right);
 t_vector	ft_rest_vect(t_vector origin, t_vector obj);
 t_vector	ft_normalize(t_vector ray_dir);
 t_vector	mul(t_vector a, float b); // multiplicacio vector per escalar
+float		length(t_vector a);
 //Colors
 int			ft_set_colour(t_ambient *amb, t_object *obj, t_colours *colours, int type);
 #endif

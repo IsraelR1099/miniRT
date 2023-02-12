@@ -51,3 +51,7 @@ t_vector	mul(t_vector a, float b)
 	t_vector  result = {a.x * b, a.y * b, a.z * b};
 	return result;
 }
+float length(t_vector a) 
+{
+  return sqrtf(a.x * a.x + a.y * a.y + a.z * a.z);
+}
