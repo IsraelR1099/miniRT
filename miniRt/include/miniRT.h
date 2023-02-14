@@ -22,7 +22,8 @@
 # define BUFFER_SIZE 1
 # define WIDTH 1080
 # define HEIGHT 720
-# define RATIO	0.96
+# define RATIO	1.5
+# define FOV	80
 enum	e_ident
 {
 	A,
@@ -153,8 +154,8 @@ typedef struct s_colour
 
 //Intersections
 int			ft_intersects(t_ambient *amb, t_object *obj, t_vector ray_dir);
-double		ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir);
-double		ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir);
+int		ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir,double *t);
+int		ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir, double *t);
 //mlx functions
 void		ft_init(t_ambient *amb, t_object *obj);
 void		ft_generate(t_ambient *amb, t_object *obj, t_window *mlx);
@@ -213,6 +214,7 @@ t_vector	ft_rest_vect(t_vector origin, t_vector obj);
 t_vector	ft_normalize(t_vector ray_dir);
 t_vector	mul(t_vector a, float b); // multiplicacio vector per escalar
 float		length(t_vector a);
+t_vector	add(t_vector a, t_vector b);
 //Colors
 int			ft_set_colour(t_ambient *amb, t_object *obj, t_colours *colours, int type);
 #endif

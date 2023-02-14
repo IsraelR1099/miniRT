@@ -13,51 +13,44 @@
 #include "../include/miniRT.h"
 #include "../mlx/mlx.h"
 
+t_vector getRayDirection(int j, int i, double pixelwidth, double pixelheight) 
+{
+	t_vector	result;
+
+	result.x = (j- WIDTH / 2) * pixelwidth ; 
+	result.y = (HEIGHT / 2 - i) * pixelheight;
+	result.z = -1;
+
+  return (result);
+}
+
 void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 {
-	int			i;
-	int			j;
-	int			t;
-	float		len;
+	int		i;
+	int		j;
+	int		k;
+	double		pixelwidth;
+	double		pixelheight;
+	t_cam		*cam;
 	t_vector	ray_dir;
-	int			type;
+	int		type;
 	t_colours	colours;
 
+	cam = (t_cam *)ft_find_lst(amb, C);
 	i = 0;
-	t = 300;
-	len = 0;
+	k = 0;
 	ft_set_colour(amb, obj, &colours, 6);
-	int k = 0;
-	(void)t;
+	pixelwidth = tan(cam->fov / 2.0 * M_PI / 180.0) * RATIO / WIDTH;
+	pixelheight = tan(cam->fov / 2.0 * M_PI / 180.0) / HEIGHT;
+	
 	while (i < HEIGHT)
 	{
 		j = 0;
 		while (j < WIDTH)
 		{
-			//calculate ray direction
-
-			ray_dir.x = (j- WIDTH / 2) ; 
-			ray_dir.y = (i -HEIGHT /2 ) * (RATIO);
-			ray_dir.z = -1 * t;
-			/*
-			ray_dir.x = (2 * (j + 0.5) / WIDTH - 1) * RATIO;
-        		ray_dir.y = 1 - 2 * (i + 0.5) / HEIGHT;
-			ray_dir.z = -1 *t;
-	
-			ray_dir.x = (j / WIDTH  -0.5); 
-			ray_dir.y = (i / HEIGHT -0.5);
-			ray_dir.z = -1 * t;
-	
-			ray_dir.x = (j- WIDTH / 2) ; 
-			ray_dir.y = (i -HEIGHT /2 ) * (RATIO);
-			ray_dir.z = -1 * t;
-	
-			ray_dir.x = (2 * ((i + 0.5) / WIDTH) -1) * RATIO;
-			ray_dir.y = (1 - 2 * ((j + 0.5) / HEIGHT));
-			ray_dir.z = -1 * t;
-	*/		
-			//normalize direction vector
+			ray_dir = getRayDirection(j, i,pixelwidth,pixelheight);
 			ft_normalize(ray_dir);
+		
 			type = ft_intersects(amb, obj, ray_dir);
 			if (type == sp)
 			{
@@ -76,5 +69,4 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 		i++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
-	(void)len;
 }

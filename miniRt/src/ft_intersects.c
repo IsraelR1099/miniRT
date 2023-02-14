@@ -15,17 +15,26 @@
 
 int	ft_intersects(t_ambient *amb, t_object *obj, t_vector ray_dir)
 {
-	double	t_sphere;
-	double	t_plane;
-	//double	t_cyl;
+	double		t;
+	double		p;
+	int		pla;
+	int		esfera;
 
-	t_sphere = ft_inter_sphere(amb, obj, ray_dir);
-	t_plane = ft_inter_plane(amb, obj, ray_dir);
-	if ( t_sphere == 2 && t_plane == 2)
-		return (A);
-	if ((t_plane > t_sphere) || ( t_sphere == 2))
-		return (pl); 
-	if ((t_plane < t_sphere) || ( t_plane  == 2))
-		return (sp);
+	t = 0.0;
+	p = 0.0;
+	pla = ft_inter_plane(amb, obj, ray_dir, &p);	
+	esfera = ft_inter_sphere(amb, obj, ray_dir, &t);
+	
+	if (esfera && pla)	
+	{
+		if (t < p)
+			return(sp);
+		else
+			return(pl);
+	}	
+	if (pla)
+		return(pl);
+	if (esfera)
+		return(sp);
 	return (0);
 }

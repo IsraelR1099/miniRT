@@ -60,46 +60,42 @@ static double	ft_c_value(t_ambient *amb, t_object *obj)
 	return (ft_dot_product_vect(res_cam_sph, res_cam_sph) - ((sphere->diameter / 2) * (sphere->diameter / 2)));	
 }
 
-static double	ft_calc_t(double scalar_a, double scalar_b, double scalar_c, double *t)
+static double	ft_calc_t(double scalar_a, double scalar_b, double scalar_c)
 {
-	double	temp;
-	double	t1;
-	double	t0;
-	double	temp2;
 	double	ret;
+	double	ret_positive;
+	double	ret_negative;
 
 	ret = scalar_b * scalar_b - (4 * scalar_a * scalar_c);
-	if (ret < 0.0)
+	ret_positive = (-scalar_b + sqrt(ret)) / (2 * scalar_a);
+	ret_negative = (-scalar_b - sqrt(ret)) / (2 * scalar_a);
+	if (ret_positive == ret_negative)
 		return (0);
-	temp = scalar_b * scalar_b - (4 * scalar_a * scalar_c);
-	t1 = (-scalar_b + sqrt(temp)) / (2 * scalar_a);
-	t0 = (-scalar_b - sqrt(temp)) / (2 * scalar_a);
-	if (t0 > t1) 
-    	{
-		temp2 = t0;
-		t0 = t1;
-		t1 = temp2;
-		if (t0 < 0.0) 
-		{
-			t0 = t1;
-		}
-		if (t0 < 0.0)
-		{
-			return (0);
-		}
-	}
-    	*t = t0;
-    	return (1);
+	return (ret_negative);
 }
 
-int	ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir, double *t)
+double	ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir)
 {
 	double	scalar_a;
 	double	scalar_b;
 	double	scalar_c;
-	
+	double	ret;
+	double	calc_t;
+
+
 	scalar_a = ft_a_value(ray_dir);
 	scalar_b = ft_b_value(amb, obj, ray_dir);
+	if (scalar_b == 0)
+		return(2);
 	scalar_c = ft_c_value(amb, obj);
-	return(ft_calc_t(scalar_a, scalar_b, scalar_c, t));
+	ret = scalar_b * scalar_b - (4 * scalar_a * scalar_c);
+	if (ret < 0)
+		return (2);
+	calc_t = ft_calc_t(scalar_a, scalar_b, scalar_c);
+	if (calc_t < 0)
+		calc_t = calc_t * -1;
+	//if (calc_t != 0)
+	//	printf("valor t esfera%f\n",calc_t);;
+	//(void)calc_t;
+	return (calc_t);
 }

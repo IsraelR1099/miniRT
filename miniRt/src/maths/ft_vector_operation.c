@@ -55,3 +55,8 @@ float length(t_vector a)
 {
   return sqrtf(a.x * a.x + a.y * a.y + a.z * a.z);
 }
+t_vector add(t_vector a, t_vector b) 
+{
+  t_vector result = {a.x + b.x, a.y + b.y, a.z + b.z};
+  return result;
+}
