@@ -52,6 +52,9 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 			ft_normalize(ray_dir);
 		
 			type = ft_intersects(amb, obj, ray_dir);
+
+			if (type == cy)
+				ft_my_mlx_pxput(mlx, j, i, colours.c_cylinder);
 			if (type == sp)
 			{
 				ft_my_mlx_pxput(mlx, j, i, colours.c_sphere);
@@ -59,8 +62,8 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 			}
 			else if (type == pl)
 				ft_my_mlx_pxput(mlx, j, i, colours.c_plane);
-			else if (type == cy)
-				ft_my_mlx_pxput(mlx, j, i, colours.c_cylinder);
+			//else if (type == cy)
+			//	ft_my_mlx_pxput(mlx, j, i, colours.c_cylinder);
 			else
 				ft_my_mlx_pxput(mlx, j, i, colours.c_ambient);
 		//	ft_my_mlx_pxput(mlx, j, i, ft_colour_value(amb, A));

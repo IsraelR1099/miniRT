@@ -49,7 +49,7 @@ int	ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir, double *t)
  	 return 0;
 	 */
 	ret = ft_dot_product_vect(normal_plane, ft_rest_vect(point_plane, cam_pos)) / ft_dot_product_vect(normal_plane, ray_dir);
-	if (ret >= 0)
+	if (ret >= 0.0)
 		return(0);
 	else
 	{

@@ -156,6 +156,7 @@ typedef struct s_colour
 int			ft_intersects(t_ambient *amb, t_object *obj, t_vector ray_dir);
 int		ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir,double *t);
 int		ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir, double *t);
+int     ft_intersect_cylon(t_ambient *amb, t_object *obj, t_vector ray_dir, double *t);
 //mlx functions
 void		ft_init(t_ambient *amb, t_object *obj);
 void		ft_generate(t_ambient *amb, t_object *obj, t_window *mlx);

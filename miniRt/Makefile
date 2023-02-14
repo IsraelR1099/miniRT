@@ -44,6 +44,7 @@ SRC = src/parser/ft_error.c \
 		src/ft_intersects.c \
 		src/ft_intersects_sphere.c \
 		src/ft_intersects_plane.c \
+		src/ft_intersects_cylon.c \
 		src/maths/ft_vector_operation.c \
 		src/ft_init.c \
 		src/main.c
