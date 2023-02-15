@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:38:13 by irifarac          #+#    #+#             */
-/*   Updated: 2023/02/10 13:15:07 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:51:55 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir, double *t)
 	normal_plane.x = plane->x_normal;
 	normal_plane.y = plane->y_normal;
 	normal_plane.z = plane->z_normal;
+	ft_normalize(normal_plane);
 	point_plane.x = plane->x;
         point_plane.y = plane->y;
         point_plane.z = plane->z;
@@ -33,7 +34,8 @@ int	ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir, double *t)
         cam_pos.x = cam->x;
         cam_pos.y = cam->y;
         cam_pos.z = cam->z;
-	/*
+	/**
+	
 	float denom = ft_dot_product_vect(normal_plane, ray_dir);
 	if (fabs(denom) > 1e-6) 
 	{
@@ -48,8 +50,10 @@ int	ft_inter_plane(t_ambient *amb, t_object *obj, t_vector ray_dir, double *t)
   	}
  	 return 0;
 	 */
-	ret = ft_dot_product_vect(normal_plane, ft_rest_vect(point_plane, cam_pos)) / ft_dot_product_vect(normal_plane, ray_dir);
-	if (ret >= 0.0)
+	
+	//ret = ft_dot_product_vect(normal_plane, ft_rest_vect(point_plane, cam_pos)) / ft_dot_product_vect(normal_plane, ray_dir);
+	ret = fabs(ft_dot_product_vect(normal_plane, ft_rest_vect(point_plane, cam_pos)) / ft_dot_product_vect(normal_plane, ray_dir));
+	if (ret < 0.0)
 		return(0);
 	else
 	{

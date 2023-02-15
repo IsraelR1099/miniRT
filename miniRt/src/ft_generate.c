@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:21:31 by irifarac          #+#    #+#             */
-/*   Updated: 2023/02/10 11:58:07 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:51:53 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_vector getRayDirection(int j, int i, double pixelwidth, double pixelheight)
 {
 	t_vector	result;
 
-	result.x = (j- WIDTH / 2) * pixelwidth ; 
-	result.y = (HEIGHT / 2 - i) * pixelheight;
+	result.x = ( WIDTH / 2 -j) * pixelwidth ; 
+	result.y = (i-HEIGHT / 2 ) * pixelheight;
 	result.z = -1;
 
   return (result);
@@ -33,6 +33,7 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 	double		pixelheight;
 	t_cam		*cam;
 	t_vector	ray_dir;
+	t_vector	ray_pos;
 	int		type;
 	t_colours	colours;
 
@@ -50,8 +51,13 @@ void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
 		{
 			ray_dir = getRayDirection(j, i,pixelwidth,pixelheight);
 			ft_normalize(ray_dir);
-		
-			type = ft_intersects(amb, obj, ray_dir);
+			ray_pos.x = cam->x_normal;
+			ray_pos.y = cam->y_normal;
+			ray_pos.z = cam->z_normal;
+
+			ray_pos = add(ray_pos, mul(ray_dir,0.5));	
+			
+			type = ft_intersects(amb, obj, ray_pos);
 
 			if (type == cy)
 				ft_my_mlx_pxput(mlx, j, i, colours.c_cylinder);

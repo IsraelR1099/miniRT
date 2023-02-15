@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 11:05:21 by irifarac          #+#    #+#             */
-/*   Updated: 2023/02/10 13:15:00 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:51:50 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,17 @@ static double	ft_calc_t(double scalar_a, double scalar_b, double scalar_c, doubl
 	temp = scalar_b * scalar_b - (4 * scalar_a * scalar_c);
 	t1 = (-scalar_b + sqrt(temp)) / (2 * scalar_a);
 	t0 = (-scalar_b - sqrt(temp)) / (2 * scalar_a);
+/*
+	if (t0 < 0 && t1 < 0 )
+		return (0);
+	else if (t0 <= 0.0)
+		t0 = t1;
+	else if (t1 <= 0.0)
+		t1 = t0;
+	 *t = ft_min_double(t0, t1);
+	return(1);
+	*/
+
 	if (t0 > t1) 
     	{
 		temp2 = t0;
@@ -88,8 +99,11 @@ static double	ft_calc_t(double scalar_a, double scalar_b, double scalar_c, doubl
 			return (0);
 		}
 	}
-    	*t = t0;
+		*t = (t0);
+    	//*t = fabs(t0);
     	return (1);
+		
+
 }
 
 int	ft_inter_sphere(t_ambient *amb, t_object *obj, t_vector ray_dir, double *t)

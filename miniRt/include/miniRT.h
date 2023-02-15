@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:22:35 by irifarac          #+#    #+#             */
-/*   Updated: 2023/02/10 11:58:43 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:21:34 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ t_vector	ft_normalize(t_vector ray_dir);
 t_vector	mul(t_vector a, float b); // multiplicacio vector per escalar
 float		length(t_vector a);
 t_vector	add(t_vector a, t_vector b);
+double		ft_min_double(double x, double y);
 //Colors
 int			ft_set_colour(t_ambient *amb, t_object *obj, t_colours *colours, int type);
 #endif
