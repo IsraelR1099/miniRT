@@ -210,6 +210,7 @@ float		ft_diameter(char **ftoken, char *eftoken);
 t_object	*ft_find_lst_obj(t_object *obj, int type);
 t_ambient	*ft_find_lst(t_ambient *amb, int type);
 //Maths functions
+t_vector        ft_product_vect(t_vector a, t_vector b);
 double		ft_dot_product_vect(t_vector vector_left, t_vector vector_right);
 t_vector	ft_rest_vect(t_vector origin, t_vector obj);
 t_vector	ft_normalize(t_vector ray_dir);

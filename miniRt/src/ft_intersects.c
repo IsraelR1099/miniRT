@@ -28,8 +28,12 @@ int	ft_intersects(t_ambient *amb, t_object *obj, t_vector ray_dir)
 	pla = ft_inter_plane(amb, obj, ray_dir, &p);	
 	esfera = ft_inter_sphere(amb, obj, ray_dir, &t);
 	cylon = ft_intersect_cylon(amb, obj, ray_dir, &q);
-	//if (cylon)
-	//	return(cy);	
+	if (cylon)
+	{
+		printf("cilindre intgerseccio%f",q);
+		//return(cy);	
+	}
+	//(void)cylon;
 	if (esfera && pla)	
 	{
 		if (t < p)

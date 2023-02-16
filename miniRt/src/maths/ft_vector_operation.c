@@ -13,6 +13,16 @@
 #include "../../include/miniRT.h"
 #include "../../mlx/mlx.h"
 
+t_vector	ft_product_vect(t_vector a, t_vector b)
+{
+	t_vector	res;
+
+	res.x = a.y * b.z - a.z * b.y;
+	res.y = a.x * b.z - a.z * b.x;
+	res.z= a.x * b.y - a.y * b.x;
+	return(res);
+}
+
 double	ft_dot_product_vect(t_vector vector_left, t_vector vector_right)
 {
 	float	x;

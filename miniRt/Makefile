@@ -59,19 +59,19 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@echo "$(GREEN)Compilando libreria mlx$(RESET)"
 	#LINUX MARC
-	#cd mlx_linux && make all
-	#gcc $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-	cd mlx && make all
+	cd mlx_linux && make all
+	gcc $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	#cd mlx && make all
 	@echo "$(GREEN)Creando ejecutable $@ 🛠  $(RESET)"
-	gcc $(CFLAGS) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
+	#gcc $(CFLAGS) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
 	@echo "$(GREEN)Compilacion acabada ✅ $@ $(RESET)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c include/miniRT.h
 	@echo "$(GREEN)Compilando $< de $@ $(RESET)"
 	@mkdir -p $(@D)
 	#LINUX MARC
-	#gcc -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
-	gcc $(CFLAGS) -o $@ -c $<
+	gcc -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	#gcc $(CFLAGS) -o $@ -c $<
 
 clean:
 ifneq ("$(wildcard $(OBJ) $(DEPENDS) $(OBJDIR))", "")
