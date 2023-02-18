@@ -91,12 +91,41 @@ char	*ft_lines(char *str,int fd)
 	return (new_str);
 }
 
+void	ft_create_inicialize_matriu(float ***matriu)
+{
+	int	i;
+	int	j;
+
+	*matriu = (float **)malloc(4 * sizeof(float *)); // Reservar memoria para las filas
+   	i = 0;
+	while (i <= 4) 
+	{
+		(*matriu)[i] = (float *)malloc(4 * sizeof(float)); // Reservar memoria para las columnas
+   		i++;
+	}
+	i = 0;
+	while (i <= 4)
+        {
+		j = 0;
+		while (j <= 4)
+	        {
+                	(*matriu)[i][j] = 0.0;
+                	j++;
+        	}
+		i++;
+        }
+}
 
 int	main(int counter, char **str)
 {
 	t_ambient	*amb;
 	t_object	*objs;
 	int			fd;
+	float		**matriu;
+	int		i;
+
+	i = 0;
+	ft_create_inicialize_matriu(&matriu);
 
 	if (counter == 2)
 	{
@@ -118,5 +147,12 @@ int	main(int counter, char **str)
 	}
 	else
 		printf("Wrong number of arguments\n");
+	//alliberem la matriu
+	while (i <= 4)
+        {
+            free(matriu[i]);
+                i++;
+        }
+	free(matriu);
 	return (0);
 }

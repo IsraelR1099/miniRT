@@ -27,7 +27,7 @@ t_vector getRayDirection(int j, int i, double pixelwidth, double pixelheight)
   return (result);
 }
 
-t_vector	ft_center_cam(t_ambient *amb, int i, int j)
+t_vector	ft_center_cam(t_ambient *amp, int i, int j)
 {
 	t_cam		*cam;
 	t_vector	eye;
@@ -57,14 +57,14 @@ t_vector	ft_center_cam(t_ambient *amb, int i, int j)
 	view.x = cam->x_normal;
 	view.y = cam->y_normal;
 	view.z = cam->z_normal;
-	center = add(eye, mul(view, dis));
+	center = add(eye, mul(view, dis);
 	up.x = 1;
 	up.y = 0;
 	up.z = 0;
 	horz = ft_normalize(ft_product_vect(up, view));
 	vert = ft_normalize(ft_product_vect(view, horz));
-	hsize = 2 * dis * tan(hfov / 2);
-	vsize = 2 * dis * tan(vfov / 2);
+	hsize = 2 * dis * TAN(hfov / 2);
+	vsize = 2 * dis * TAN(vfov / 2);
 	hpixel = hsize / WIDTH;
 	vpixel = vsize / HEIGHT;
 	(void)vfov;
@@ -76,7 +76,7 @@ t_vector	ft_center_cam(t_ambient *amb, int i, int j)
 	(void)hpixel;
 	(void)vpixel;
 	ray = add(eye, ft_normalize(ft_rest_vect(pixel,eye)));
-	return (ray);
+	return(ray);
 }
 
 void	ft_generate(t_ambient *amb, t_object *obj, t_window *mlx)
