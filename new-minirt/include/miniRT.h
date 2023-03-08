@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:56:32 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/08 10:27:16 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:29:10 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define WIDTH 1080
 # define HEIGHT 720
 # define PI 3.14
+# define fov 60
 
 /*typedef struct	s_point2d
 {
