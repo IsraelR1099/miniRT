@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:00:54 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/08 10:50:54 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/03/10 10:29:37 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_world
 {
 	t_cameras	*camera;
+	t_projection	*projection:
 	t_window	*mlx;
 }	t_world;
 

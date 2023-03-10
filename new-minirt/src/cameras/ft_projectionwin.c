@@ -6,20 +6,25 @@
 /*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:08:43 by msoler-e          #+#    #+#             */
-/*   Updated: 2023/03/08 13:07:43 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/03/10 10:34:06 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../maths/maths.h"
 #include "cameras.h"
 
-t_projection	*ft_build_plane_projection(t_cameras *camera, t_projection *planeproj)
+t_projection	*ft_build_plane_projection(t_cameras *camera)
 {
+	t_projection	*planeproj:
 	float	tempw;
 	float	temph;
 	t_vector3d	vectempw;
 	t_vector3d	vectemph;
-	
+
+	//calculem diensions del pla de projeccio
+	planeproj = malloc(sizeof(*planeproj));
+	if (!planeproj)
+		return (NULL);
 	planeproj.hsize = 2 * camera.dis * tan(fov/2);
 	planeproj.vsize = 2 * camera.dis * tan(fov/2);
 	tempw = ((WIDTH - 1) / 2) * planeproj.hsize;
