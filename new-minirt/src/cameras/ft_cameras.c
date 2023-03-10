@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:54:24 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/10 10:32:27 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/03/10 11:01:07 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ t_cameras	*ft_build_camera(t_ambient *amb)
 {
 	t_cam		*cam;
 	t_cameras	*camera;
-//	t_projection	*planeproj;
 
 	cam = (t_cam *)ft_find_amb(amb, C);
 	if (!cam)
@@ -109,12 +108,6 @@ t_cameras	*ft_build_camera(t_ambient *amb)
 		
 	///calculem el centre del sistema de referencia de la camara
 	camera->center = ft_center(*camera);
-/*
-	//calculem diensions del pla de projeccio
-	planeproj = malloc(sizeof(*planeproj));
-	if (!planeproj)
-		return (NULL);
-	planeproj = ft_build_plane_projection(camera, planeproj);
-*/
+
 	return (camera);
 }
