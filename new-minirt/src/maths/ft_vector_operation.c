@@ -12,6 +12,17 @@
 
 #include "maths.h"
 
+t_vector3d	ft_normalize(t_vector3d ray_dir)
+{
+	float	len;
+
+	len = sqrt(ft_dot_product_vect(ray_dir, ray_dir));
+	ray_dir.x /= len;
+	ray_dir.y /= len;
+	ray_dir.z /= len;
+	return (ray_dir);
+}
+
 double	ft_dot_product_vect(t_vector3d vector_left, t_vector3d vector_right)
 {
 	float	x;

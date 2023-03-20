@@ -22,7 +22,7 @@ NAMEBMP = libbmp.a
 INCLUDE = $(OBJ) include/miniRT.h src/parser/libparser.a src/cameras/libcameras.a \
 		  src/world/libworld.a src/maths/libmaths.a src/window/libwindow.a \
 		  include/miniRT.h
-LINK = -L./src/parser -lparser -L/mlx/ -lmlx -L./src/cameras/ -lcameras \
+LINK = -L./src/parser/ -lparser -L/mlx/ -lmlx -L./src/cameras/ -lcameras \
 	   -L./src/world/ -lworld -L./src/maths/ -lmaths \
 	   -L./src/window/ -lwindow
 CFLAGS = -Wall -Wextra -Werror -MMD -lmlx -lbmp -lm -lbsd -lX11 -lXext -g
@@ -47,6 +47,8 @@ CAMERA = src/cameras
 SRC =	src/main.c \
 		src/render/ft_init.c \
 		src/render/ft_render.c \
+		src/render/ft_intersects.c \
+		src/render/ft_intersects_sphere.c \
 		#src/ft_init.c \
 		#src/ft_set_frustrum.c \
 		#src/ft_color.c \
