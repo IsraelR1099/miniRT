@@ -20,7 +20,7 @@
 typedef struct s_world
 {
 	t_cameras		*camera;
-	t_projection	*projection:
+	t_projection		*projection;
 	t_window		*mlx;
 }	t_world;
 

@@ -15,16 +15,16 @@
 #include "../maths/maths.h"
 #include "../world/world.h"
 
-t_ray	ft_get_ray(t_world world, int x, int y)
+t_ray	*ft_get_ray(t_world *world, int x, int y)
 {
-	t_point3d	pixel:
-	t_ray		*ray:
+	t_point3d	pixel;
+	t_ray		*ray;
 
 	ray = malloc(sizeof(*ray));
 	if (!ray)
-		return (NULL);
+		return(NULL);
 
-
+	return(0);
 }
 
 
@@ -43,7 +43,7 @@ void	ft_render(t_ambient *amb, t_object *obj,t_world *world)
 		while (x < WIDTH)
 		{
 	//		colour = ft_samplers(&ray,(float)x, (float)y);
-			ray = ft_get_ray(world,x,y);
+			ray = ft_get_ray(world, x, y);
 			ft_my_mlx_pxput(world->mlx, x, y, colour);
 			x++;
 		}

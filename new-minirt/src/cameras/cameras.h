@@ -39,7 +39,7 @@ t_cameras		*ft_build_camera(t_ambient *amb);
 t_vector3d		ft_upvector(t_cameras camera);
 t_vector3d		ft_rightaxis(t_vector3d forward);
 t_vector3d		ft_forwardvector(t_cameras camera);
-t_projection	*ft_build_plane_projection(t_cameras *camera, t_projection *planeproj);
+t_projection	*ft_build_plane_projection(t_cameras *camera);
 //Utils
 t_ambient	*ft_find_amb(t_ambient *amb, int type);
 
