@@ -3,45 +3,41 @@
 #include "../maths/maths.h"
 #include "../world/world.h"
 
-static double	ft_a_value(t_vector ray_dir)
+static double	ft_a_value(t_ray *ray_dir)
 {
-	return (ft_dot_product_vect(ray_dir, ray_dir));
+	return (ft_dot_product_vect(ray_dir->direction, ray_dir->direction));
 }
 
-static double	ft_b_value(t_ambient *amb, t_object *obj, t_vector ray_dir)
+static double	ft_b_value(t_object *obj, t_ray *ray_dir)
 {
-	t_cam		*cam;
 	t_sphere	*sphere;
-	t_vector	sphere_pos;
-	t_vector	cam_pos;
-	t_vector	res_cam_sphere;
+	t_vector3d	sphere_pos;
+	t_vector3d	res_cam_sphere;
+	t_vector3d	cam_pos;
 
-	cam = (t_cam *)ft_find_lst(amb, C);
-	cam_pos.x = cam->x;
-	cam_pos.y = cam->y;
-	cam_pos.z = cam->z;
+	cam_pos.x = ray_dir->origin.x;
+	cam_pos.y = ray_dir->origin.y;
+	cam_pos.z = ray_dir->origin.z;
 	sphere = (t_sphere *)ft_find_lst_obj(obj, sp);
 	sphere_pos.x = sphere->x;
 	sphere_pos.y = sphere->y;
 	sphere_pos.z = sphere->z;
 	res_cam_sphere = ft_rest_vect(cam_pos, sphere_pos);
-	if (ft_dot_product_vect(ray_dir, res_cam_sphere) < 0)
+	if (ft_dot_product_vect(ray_dir->direction, res_cam_sphere) < 0)
 		return(0);
-	return (2 * ft_dot_product_vect(ray_dir, res_cam_sphere));
+	return (2 * ft_dot_product_vect(ray_dir->direction, res_cam_sphere));
 }
 
-static double	ft_c_value(t_ambient *amb, t_object *obj)
+static double	ft_c_value(t_ray *ray_dir, t_object *obj)
 {
-	t_vector	res_cam_sph;
-	t_vector	cam_pos;
-	t_vector	sphere_pos;
-	t_cam		*cam;
+	t_vector3d	res_cam_sph;
+	t_vector3d	cam_pos;
+	t_vector3d	sphere_pos;
 	t_sphere	*sphere;
 
-	cam = (t_cam *)ft_find_lst(amb, C);
-	cam_pos.x = cam->x;
-	cam_pos.y = cam->y;
-	cam_pos.z = cam->z;
+	cam_pos.x = ray_dir->origin.x;
+	cam_pos.y = ray_dir->origin.y;
+	cam_pos.z = ray_dir->origin.z;
 	sphere = (t_sphere *)ft_find_lst_obj(obj, sp);
 	sphere_pos.x = sphere->x;
 	sphere_pos.y = sphere->y;
@@ -96,14 +92,14 @@ static double	ft_calc_t(double scalar_a, double scalar_b, double scalar_c, doubl
 
 }
 
-int	ft_inter_sphere(t_ambient *amb, t_object *obj, t_ray *ray_dir, double *t)
+int	ft_inter_sphere(t_object *obj, t_ray *ray_dir, double *t)
 {
 	double	scalar_a;
 	double	scalar_b;
 	double	scalar_c;
 	
 	scalar_a = ft_a_value(ray_dir);
-	scalar_b = ft_b_value(amb, obj, ray_dir);
-	scalar_c = ft_c_value(amb, obj);
+	scalar_b = ft_b_value(obj, ray_dir);
+	scalar_c = ft_c_value(ray_dir, obj);
 	return(ft_calc_t(scalar_a, scalar_b, scalar_c, t));
 }

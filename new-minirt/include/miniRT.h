@@ -57,6 +57,6 @@ typedef struct	s_ray
 void		ft_init(t_ambient *amb, t_object *obj);
 void		ft_render(t_ambient *amb, t_object *obj, t_world *world);
 t_ambient	*ft_find_amb(t_ambient *amb, int type);
-int		ft_intersects(t_ambient *amb, t_object *obj, t_ray *ray_dir);
-int		ft_inter_sphere(t_ambient *amb, t_object *obj, t_ray *ray_dir, double *t);
+int		ft_intersects(t_object *obj, t_ray *ray_dir);
+int		ft_inter_sphere(t_object *obj, t_ray *ray_dir, double *t);
 #endif
