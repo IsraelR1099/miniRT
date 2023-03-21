@@ -6,22 +6,11 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:05:48 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/10 11:21:07 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:18:19 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "maths.h"
-
-t_vector3d	ft_normalize(t_vector3d ray_dir)
-{
-	float	len;
-
-	len = sqrt(ft_dot_product_vect(ray_dir, ray_dir));
-	ray_dir.x /= len;
-	ray_dir.y /= len;
-	ray_dir.z /= len;
-	return (ray_dir);
-}
 
 double	ft_dot_product_vect(t_vector3d vector_left, t_vector3d vector_right)
 {
@@ -33,6 +22,7 @@ double	ft_dot_product_vect(t_vector3d vector_left, t_vector3d vector_right)
 	x = vector_left.x * vector_right.x;
 	y = vector_left.y * vector_right.y;
 	z = vector_left.z * vector_right.z;
+	//printf("left x %f, right x %f\n", vector_left.x, vector_right.x);
 	ret = x + y + z;
 	return (ret);
 }
@@ -66,7 +56,7 @@ t_vector3d	ft_sum_vect(t_vector3d first, t_vector3d second)
 
 	ret.x = first.x + second.x;
 	ret.y = first.y + second.y;
-	ret.y = first.z + second.z;
+	ret.z = first.z + second.z;
 	return (ret);
 }
 

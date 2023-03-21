@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:14:44 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/08 11:14:37 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/03/10 11:00:50 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_ray
 	t_vector3d	direction;
 }	t_ray;
 
-t_vector3d	ft_normalize(t_vector3d ray_dir);
 double		ft_dot_product_vect(t_vector3d vector_left, t_vector3d vector_right);
 t_vector3d	ft_vectorial_product(t_vector3d vector_left, t_vector3d vector_right);
 t_vector3d	ft_rest_vect(t_vector3d origin, t_vector3d obj);

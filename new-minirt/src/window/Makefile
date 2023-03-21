@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/03/10 12:40:06 by irifarac          #+#    #+#              #
+#    Updated: 2023/03/10 12:40:18 by irifarac         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 #Colores
 
 RED = \033[0;31m
@@ -5,7 +17,7 @@ GREEN = \033[0;32m
 RED = \033[0m
 
 NAME = libwindow.a
-CFLAGS = -Wall -Wextra -Werror -MMD
+CFLAGS = -Wall -Wextra -Werror -MMD -g -O0
 CREATION_LIB = ar -rcs
 DEPENDS = $(patsubst %.c, %.d, $(SRC))
 

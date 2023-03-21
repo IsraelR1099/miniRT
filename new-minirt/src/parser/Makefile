@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/03/10 10:07:31 by irifarac          #+#    #+#              #
+#    Updated: 2023/03/10 12:59:09 by irifarac         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 #Colores
 
 RED = \033[0;31m
@@ -5,7 +17,7 @@ GREEN = \033[0;32m
 RED = \033[0m
 
 NAME = libparser.a
-CFLAGS = -Wall -Wextra -Werror -MMD
+CFLAGS = -Wall -Wextra -Werror -MMD -g -O0
 CREATION_LIB = ar -rcs
 DEPENDS = $(patsubst %.c, %.d, $(SRC))
 
@@ -44,8 +56,9 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c parser.h
 	gcc $(CFLAGS) -o $@ -c $<
 
 clean:
-ifneq ("$(wildcard $(OBJ) $(DEPENDS))", "")
+ifneq ("$(wildcard $(OBJ) $(DEPENDS) $(OBJDIR))", "")
 	rm -f $(OBJ) $(DEPENDS)
+	rm -rf $(OBJDIR)
 	@echo "$(GREEN)Objetos borrados $(RESET)"
 else
 	@echo "$(RED)Los objetos de $(NAME) no existen $(RESET)"

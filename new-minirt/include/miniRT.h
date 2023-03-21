@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:56:32 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/08 13:29:10 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:09:01 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define WIDTH 1080
 # define HEIGHT 720
 # define PI 3.14
-# define fov 60
 
 /*typedef struct	s_point2d
 {
@@ -57,6 +56,4 @@ typedef struct	s_ray
 void		ft_init(t_ambient *amb, t_object *obj);
 void		ft_render(t_ambient *amb, t_object *obj, t_world *world);
 t_ambient	*ft_find_amb(t_ambient *amb, int type);
-int		ft_intersects(t_object *obj, t_ray *ray_dir);
-int		ft_inter_sphere(t_object *obj, t_ray *ray_dir, double *t);
 #endif

@@ -5,18 +5,17 @@
 #                                                     +:+ +:+         +:+      #
 #    By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/10 12:40:25 by irifarac          #+#    #+#              #
-#    Updated: 2023/03/10 12:57:53 by irifarac         ###   ########.fr        #
+#    Created: 2023/03/08 11:23:23 by irifarac          #+#    #+#              #
+#    Updated: 2023/03/10 12:38:58 by irifarac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Colores
-
 RED = \033[0;31m
 GREEN = \033[0;32m
 RED = \033[0m
 
-NAME = libworld.a
+NAME = libgeometricobj.a
 CFLAGS = -Wall -Wextra -Werror -MMD -g -O0
 CREATION_LIB = ar -rcs
 DEPENDS = $(patsubst %.c, %.d, $(SRC))
@@ -24,8 +23,8 @@ DEPENDS = $(patsubst %.c, %.d, $(SRC))
 #Carpetas
 OBJDIR = obj
 SRCDIR = ./
-SRC = ft_set_world.c
-
+SRC = ft_check_sphere.c \
+		ft_check_plane.c
 OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
@@ -33,17 +32,17 @@ all: $(NAME)
 #dependencias
 -include $(DEPENDS)
 $(NAME): $(OBJ)
-	@echo "$(GREEN)Compilando parser$(RESET)"
+	@echo "$(GREEN)Compilando $(NAME)$(RESET)"
 	$(CREATION_LIB) $(NAME) $(OBJ)
 	@echo "$(GREEN)Compilado $@ $(RESET)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c world.h
+$(OBJDIR)/%.o: $(SRCDIR)/%.c geometricobj.h
 	@echo "$(GREEN)Compilando $< de $@ $(RESET)"
 	@mkdir -p $(@D)
 	gcc $(CFLAGS) -o $@ -c $<
 
 clean:
-ifneq ("$(wildcard $(OBJ) $(DEPENDS) $(OBJDIR))", "")
+ifneq ("$(wildcard $(OBJ) $(DEPENDS))", "")
 	rm -f $(OBJ) $(DEPENDS)
 	rm -rf $(OBJDIR)
 	@echo "$(GREEN)Objetos borrados $(RESET)"

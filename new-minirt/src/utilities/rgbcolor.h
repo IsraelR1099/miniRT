@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   samplers.h                                         :+:      :+:    :+:   */
+/*   rgbcolor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 14:00:08 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/17 13:44:41 by irifarac         ###   ########.fr       */
+/*   Created: 2023/03/10 11:01:51 by irifarac          #+#    #+#             */
+/*   Updated: 2023/03/20 10:03:55 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SAMPLER_H
-# define SAMPLER_H
+#ifndef RGBCOLOR_H
+# define RGBCOLOR_H
 
-# include "../maths/maths.h"
-# include "../window/window.h"
-# include "../world/world.h"
-# include "../tracers/tracer.h"
-# include "../utilities/rgbcolor.h"
-
-size_t	ft_samplers(t_world *world, t_ray *ray, double c, double r);
+typedef struct s_rgbcolor
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
 
 #endif
