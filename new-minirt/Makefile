@@ -1,11 +1,27 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/03/20 09:40:37 by irifarac          #+#    #+#              #
+#    Updated: 2023/03/20 09:51:28 by irifarac         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#Colours
+
 RED = \033[0;31m
 GREEN = \033[0;32m
 RESET = \033[0m
 
-#Name
+# Binary
+
 NAME = miniRT
 
-# directories
+# Directories
+
 SRC_DIR = ./
 INCLUDE_DIR = include
 OBJ_DIR = obj
@@ -32,8 +48,6 @@ LIBS_HEADER += -I./src/geometricobj/
 LIBS_HEADER += -I./src/maths/
 LIBS_HEADER += -I./src/parser/
 LDFLAGS = -L./mlx
-LDFLAGS += -L./libbmp
-LDFLAGS += -L/usr/lib
 LDFLAGS += -L./src/window
 LDFLAGS += -L./src/world
 LDFLAGS += -L./src/samplers
@@ -52,7 +66,7 @@ LIB += -lshade
 LIB += -lgeometricobj
 LIB += -lmath
 LIB += -lparser
-LIB += -lmlx -lbmp -lm -lz -lbsd -lX11 -lXext
+LIB += -lmlx
 
 INC = $(LIBS_HEADER) -I./$(INCLUDE_DIR)
 
@@ -67,7 +81,7 @@ DEP = $(addsuffix .d, $(basename $(OBJ)))
 
 # Compilation
 
-CFLAGS = -Wall -Werror -Wextra -MMD -MP $(INC)
+CFLAGS = -Wall -Werror -Wextra -MMD -MP -O0 $(INC)
 DFLAGS = -g
 
 # Rules
@@ -77,7 +91,6 @@ all: makelibs $(NAME)
 
 makelibs:
 	$(MAKE) -C ./mlx
-	$(MAKE) -C ./libbmp
 	$(MAKE) -C src/parser
 	$(MAKE) -C src/cameras
 	$(MAKE) -C src/maths
@@ -87,20 +100,19 @@ makelibs:
 	$(MAKE) -C src/tracers
 	$(MAKE) -C src/geometricobj
 	$(MAKE) -C src/utilities
-	@echo "obj es $(OBJ)"
 
 -include $(DEP)
 $(NAME): $(OBJ) $(LIBS)
-	@echo "entro en name"
-	gcc $(OBJ) $(LDFLAGS) $(LIB)  -o $(NAME)
-	@echo "Creating binary $(NAME)"
+	@echo "$(GREEN)Creating binary $(NAME) $(RESET)"
+	gcc $(OBJ) $(LDFLAGS) $(LIB) -framework OpenGL -framework AppKit -o $(NAME)
+	@echo "$(GREEN)Compilation finished ✅ $@ $(RESET)"
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile
 	@echo "objetos es  $(OBJ)"
 	@mkdir -p $(@D)
 	gcc $(DFLAGS) $(CFLAGS) -O3 -c $< -o $@
-	@echo "Compiling.. $<"
+	@echo "$(GREEN)Compiling.. 🛠  $< $(RESET)"
 
 clean:
 ifneq ("$(wildcard $(OBJ) $(DEPENDS) $(OBJ_DIR))", "")
