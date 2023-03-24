@@ -6,7 +6,7 @@
 /*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:55:59 by msoler-e          #+#    #+#             */
-/*   Updated: 2023/03/24 11:58:07 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:24:49 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,5 +175,5 @@ double	ft_check_cylon(t_cameras *camera, t_cylinder *cylon, t_ray *ray)
 		return(0);
 
 */	
-	return (1);
+	return (-1);
 }
