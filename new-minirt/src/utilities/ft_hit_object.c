@@ -80,9 +80,10 @@ static void	ft_hit_cyl(t_object *tmp, t_world *world, t_ray *ray, t_shaderec *sh
 {
 	t_cylinder	*cylon;
 	double		t;
-
+	
+	(void)world;
 	cylon = (t_cylinder *)tmp;
-	t = ft_check_cylon(world->camera, cylon, ray);
+	t = ft_check_cylon(*cylon, *ray);
 	if (t != 0 && t < shade->t)
 	{
 		shade->hit_object = true;

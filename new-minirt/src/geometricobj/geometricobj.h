@@ -20,5 +20,5 @@
 
 double	ft_check_sphere(t_cameras *camera, t_sphere *sphere, t_ray *ray);
 double	ft_check_plane(t_cameras *camera, t_plane *plnae, t_ray *ray);
-double	ft_check_cylon(t_cameras *camera, t_cylinder *cylon, t_ray *ray);
+double	ft_check_cylon(t_cylinder cylon, t_ray ray);
 #endif
