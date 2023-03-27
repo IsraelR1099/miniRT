@@ -78,10 +78,21 @@ static t_object	*ft_advance(t_object *tmp)
 
 static void	ft_hit_cyl(t_object *tmp, t_world *world, t_ray *ray, t_shaderec *shade)
 {
-	(void)tmp;
-	(void)world;
-	(void)ray;
-	(void)shade;
+	t_cylinder	*cylon;
+	double		t;
+
+	cylon = (t_cylinder *)tmp;
+	t = ft_check_cylon(world->camera, cylon, ray);
+	if (t != 0 && t < shade->t)
+	{
+		shade->hit_object = true;
+		shade->ray = *ray;
+		shade->t = t;
+		shade->colour.r = cylon->r;
+		shade->colour.g = cylon->g;
+		shade->colour.b = cylon->b;
+		shade->hit_point = ft_hit_point(ray, t);
+	}
 }
 
 t_shaderec	*ft_hit_objects(t_object *obj, t_world *world, t_ray *ray, t_shaderec *shade)
@@ -99,7 +110,6 @@ t_shaderec	*ft_hit_objects(t_object *obj, t_world *world, t_ray *ray, t_shaderec
 			ft_hit_plane(tmp, world, ray, shade);
 		else if (tmp->type == cy)
 			ft_hit_cyl(tmp, world, ray, shade);
-//			ft_hit_cyl(tmp, world, ray, shade);
 		else
 			break ;
 		tmp = ft_advance(tmp);

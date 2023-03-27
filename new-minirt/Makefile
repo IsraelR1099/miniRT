@@ -1,27 +1,11 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/20 09:40:37 by irifarac          #+#    #+#              #
-#    Updated: 2023/03/20 09:51:28 by irifarac         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-#Colours
-
 RED = \033[0;31m
 GREEN = \033[0;32m
 RESET = \033[0m
 
-# Binary
-
+#Name
 NAME = miniRT
 
-# Directories
-
+# directories
 SRC_DIR = ./
 INCLUDE_DIR = include
 OBJ_DIR = obj
@@ -37,7 +21,7 @@ LIBS += src/tracers/libtracers.a
 LIBS += src/utilities/libshade.a
 LIBS += src/window/libwindow.a
 LIBS += src/world/libworld.a
-LIBS_HEADER = -I./mlx
+LIBS_HEADER = -I./mlx-linux
 LIBS_HEADER += -I./src/window/
 LIBS_HEADER += -I./src/world
 LIBS_HEADER += -I./src/samplers/
@@ -47,7 +31,9 @@ LIBS_HEADER += -I./src/utilities/
 LIBS_HEADER += -I./src/geometricobj/
 LIBS_HEADER += -I./src/maths/
 LIBS_HEADER += -I./src/parser/
-LDFLAGS = -L./mlx
+LDFLAGS = -L./mlx-linux
+LDFLAGS += -L./libbmp
+LDFLAGS += -L/usr/lib
 LDFLAGS += -L./src/window
 LDFLAGS += -L./src/world
 LDFLAGS += -L./src/samplers
@@ -66,7 +52,7 @@ LIB += -lshade
 LIB += -lgeometricobj
 LIB += -lmath
 LIB += -lparser
-LIB += -lmlx
+LIB += -lmlx -lbmp -lm -lz -lbsd -lX11 -lXext
 
 INC = $(LIBS_HEADER) -I./$(INCLUDE_DIR)
 
@@ -81,7 +67,7 @@ DEP = $(addsuffix .d, $(basename $(OBJ)))
 
 # Compilation
 
-CFLAGS = -Wall -Werror -Wextra -MMD -MP -O0 $(INC)
+CFLAGS = -Wall -Werror -Wextra -MMD -MP $(INC)
 DFLAGS = -g
 
 # Rules
@@ -90,7 +76,8 @@ DFLAGS = -g
 all: makelibs $(NAME)
 
 makelibs:
-	$(MAKE) -C ./mlx
+	$(MAKE) -C ./mlx-linux
+	$(MAKE) -C ./libbmp
 	$(MAKE) -C src/parser
 	$(MAKE) -C src/cameras
 	$(MAKE) -C src/maths
@@ -100,19 +87,20 @@ makelibs:
 	$(MAKE) -C src/tracers
 	$(MAKE) -C src/geometricobj
 	$(MAKE) -C src/utilities
+	@echo "obj es $(OBJ)"
 
 -include $(DEP)
 $(NAME): $(OBJ) $(LIBS)
-	@echo "$(GREEN)Creating binary $(NAME) $(RESET)"
-	gcc $(OBJ) $(LDFLAGS) $(LIB) -framework OpenGL -framework AppKit -o $(NAME)
-	@echo "$(GREEN)Compilation finished ✅ $@ $(RESET)"
+	@echo "entro en name"
+	gcc $(OBJ) $(LDFLAGS) $(LIB)  -o $(NAME)
+	@echo "Creating binary $(NAME)"
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile
 	@echo "objetos es  $(OBJ)"
 	@mkdir -p $(@D)
 	gcc $(DFLAGS) $(CFLAGS) -O3 -c $< -o $@
-	@echo "$(GREEN)Compiling.. 🛠  $< $(RESET)"
+	@echo "Compiling.. $<"
 
 clean:
 ifneq ("$(wildcard $(OBJ) $(DEPENDS) $(OBJ_DIR))", "")

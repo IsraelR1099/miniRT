@@ -15,6 +15,7 @@
 
 static double   ft_a_value(t_ray *ray, t_cylinder *cylon)
 {
+	/*
         float           temp;
         float           temp2;
         t_vector3d      normal;
@@ -26,20 +27,23 @@ static double   ft_a_value(t_ray *ray, t_cylinder *cylon)
         temp2 = ft_dot_product_vect(ray->direction, normal);
         temp2 = temp2 * temp2;
 	return(temp - temp2);
+	*/
+	(void)cylon;
+	return(ft_dot_product_vect(ray->direction, ray->direction));
 }
 
 static double   ft_b_value(t_ray *ray, t_cylinder *cylon)
 {
 	float		temp;
-	float		temp2;
+//	float		temp2;
 	t_vector3d	oc;
 	t_vector3d	center;
-	t_vector3d	normal;
+//	t_vector3d	normal;
 	t_vector3d	origin;
 
-        normal.x = cylon->x_normal; 
-        normal.y = cylon->y_normal;
-        normal.z = cylon->z_normal;
+  //      normal.x = cylon->x_normal; 
+    //    normal.y = cylon->y_normal;
+      //  normal.z = cylon->z_normal;
 	center.x = cylon->x;
 	center.y = cylon->y;
 	center.z = cylon->z;
@@ -48,24 +52,25 @@ static double   ft_b_value(t_ray *ray, t_cylinder *cylon)
 	origin.z = ray->origin.z;
 	oc = ft_rest_vect(origin, center);
 	temp = 2 * ft_dot_product_vect(ray->direction, oc);
-	temp2 = (ft_dot_product_vect(ray->direction, normal)) * (ft_dot_product_vect(oc, normal));
-	return(temp - temp2);
+	//temp2 = (ft_dot_product_vect(ray->direction, normal)) * (ft_dot_product_vect(oc, normal));
+	//return(temp - temp2);
+	return(temp);
 }
 
 static double   ft_c_value(t_ray *ray, t_cylinder *cylon)
 {
 
 	float		temp;
-	float		temp2;
+	//float		temp2;
 	float		temp3;
 	t_vector3d	oc;
 	t_vector3d	center;
-	t_vector3d	normal;
+	//t_vector3d	normal;
 	t_vector3d	origin;
 	
-        normal.x = cylon->x_normal; 
-        normal.y = cylon->y_normal;
-        normal.z = cylon->z_normal;
+        //normal.x = cylon->x_normal; 
+        //normal.y = cylon->y_normal;
+        //normal.z = cylon->z_normal;
 	center.x = cylon->x;
 	center.y = cylon->y;
 	center.z = cylon->z;
@@ -74,11 +79,12 @@ static double   ft_c_value(t_ray *ray, t_cylinder *cylon)
 	origin.z = ray->origin.z;
 	oc = ft_rest_vect(origin, center);
 	temp = ft_dot_product_vect(oc, oc);
-	temp2 = ft_dot_product_vect(oc, normal);
-	temp2 = temp2 * temp2;
+	//temp2 = ft_dot_product_vect(oc, normal);
+	//temp2 = temp2 * temp2;
 	temp3 = (cylon->diameter/2)*(cylon->diameter/2);
-	temp2 = (temp2 - temp3);
-	return(temp - temp2);
+	//temp2 = (temp2 - temp3);
+	//return(temp - temp2);
+	return(temp-temp3);
 }
 /*
 static double   ft_h_value(t_vector ray_dir, t_object *obj, t_ambient *amb, float t)
@@ -124,7 +130,8 @@ double	ft_check_cylon(t_cameras *camera, t_cylinder *cylon, t_ray *ray)
 	double	y2;
 	double	t1;
 	double	t2;
-
+	
+	printf("lofmenfssd");
 	scalar_a = ft_a_value(ray,cylon);
 	scalar_b = ft_b_value(ray,cylon);
 	scalar_c = ft_c_value(ray,cylon);
@@ -132,39 +139,29 @@ double	ft_check_cylon(t_cameras *camera, t_cylinder *cylon, t_ray *ray)
 	if (discr < 0)
 	{
 		return(0);	
-	}	
+	}
+	
 	t1 = (-scalar_b - sqrt(discr)) / (2 * scalar_a);
 	t2 = (-scalar_b + sqrt(discr)) / (2 * scalar_a);
 
 	y1 = ray->origin.y + (t1 * ray->direction.y);
 	y2 = ray->origin.y + (t2 * ray->direction.y);
-	if ((y1 < cylon->y) || (y1 > cylon->y + cylon->height/2))
-       	{
-        // El punto de intersección está fuera del cilindro.
-        t1 = INFINITY;
-    	}
 
-    if ((y2 < cylon->y) || (y2 > cylon->y + cylon->height/2)) 
-    {
-        // El punto de intersección está fuera del cilindro.
-        t2 = INFINITY;
+        printf("y1%f\n",t1);
+	 if ((y1 < -cylon->height / 2 && y2 < -cylon->height / 2) ||
+        (y1 > cylon->height / 2 && y1 > cylon->height / 2)) 
+{
+        // No intersection
+        return 0;
     }
 
-    if ((t1 > 0) && (t2 > 0)) 
-    {
-        // Ambos puntos de intersección están delante del origen del rayo.
-        if (t1 > t2)
+    // Choose the smallest non-negative t value
+    if (t1 > 0 && t1 < t2)
 	{
-		printf("t2=%f\n",y2);
-		return(y2);
+		printf("probes");
+        return(t1);
 	}
-	else
-	{
-		printf("t1=%f\n",y1);
-		return (y1);
-	}
-    }
+	else 
+        return(t2);
 
-    // El rayo no intersecta el cilindro.
-    return 0;
 }

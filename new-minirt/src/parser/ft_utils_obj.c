@@ -67,3 +67,18 @@ float	ft_diameter(char **ftoken, char *eftoken)
 	*ftoken = tmp;
 	return (ret);
 }
+
+float	ft_height(char **ftoken, char *eftoken)
+{
+	char	*tmp;
+	float	ret;
+
+	tmp = *ftoken;
+	if (ft_compare(tmp, "cy"))
+		tmp += 2;
+	while (tmp < eftoken && ft_strchr("\t\r\n\v ", *tmp))
+		tmp++;
+	ret = ft_fatoi(&tmp);
+	*ftoken = tmp;
+	return (ret);
+}

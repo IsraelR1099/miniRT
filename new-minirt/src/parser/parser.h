@@ -206,5 +206,5 @@ float		ft_ratio(char **ftoken, char *eftoken);
 float		ft_coord(char **ftoken, char *eftoken);
 float		ft_normal(char **ftoken, char *eftoken);
 float		ft_diameter(char **ftoken, char *eftoken);
-
+float		ft_height(char **ftoken, char *eftoken);
 #endif
