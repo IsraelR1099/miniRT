@@ -11,6 +11,56 @@
 /* ************************************************************************** */
 
 #include "geometricobj.h"
+#define	EPSILON 1e-4
+
+double	distance(const t_vector3d p1, const t_vector3d p2)
+{
+	return (sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2) + pow(p2.z - p1.z, 2)));
+}
+
+double	solve_plane(t_vector3d o, t_vector3d d, t_vector3d plane_p, t_vector3d plane_nv)
+{
+	double	x;
+	double	denom;
+
+	denom = ft_dot_product_vect(plane_nv, d);
+	if (denom == 0)
+		return (-1);
+	x = (ft_dot_product_vect(plane_nv, ft_rest_vect(plane_p, o))) / denom;
+	if (x > EPSILON)
+		return(x);
+	else	
+		return(-1);
+}
+
+
+double	caps_intersection(t_ray ray, t_vector3d cyl_center, t_vector3d cyl_normal, t_vector3d c2, double radius)
+{
+	double		id1;
+	double		id2;
+	t_vector3d	ip1;
+	t_vector3d	ip2;
+	t_vector3d	ray_orig;
+
+	ray_orig.x = ray.origin.x;
+	ray_orig.y = ray.origin.y;
+	ray_orig.z = ray.origin.z;
+
+	id1 = solve_plane(ray_orig, ray.direction, cyl_center, cyl_normal);
+	id2 = solve_plane(ray_orig, ray.direction, c2, cyl_normal);
+	if (id1 != -1 || id2 != -1)
+	{
+		ip1 = ft_sum_vect(ray_orig, ft_product_vect_scalar(ray.direction, id1));
+		ip2 = ft_sum_vect(ray_orig, ft_product_vect_scalar(ray.direction, id2));
+		if ((id1 != -1 && distance(ip1, cyl_center) <= radius) && (id2 != -1 && distance(ip2, c2) <= radius))
+			return (id1 < id2 ? id1 : id2);
+		else if (id1 != -1 && distance(ip1, cyl_center) <= radius)
+			return (id1);
+		else if (id2 != -1 && distance(ip2, c2) <= radius)
+			return (id2);
+	}
+	return (-1);
+}
 
 void		check_t(double *t, t_cylinder cylon, t_ray ray)
 {
@@ -19,6 +69,8 @@ void		check_t(double *t, t_cylinder cylon, t_ray ray)
 	t_vector3d	cyl_normal;
 	t_vector3d	ray_orig;
 	t_vector3d	cyl_center;
+	double		t2;
+	double		radius;
 
 	cyl_center.x = cylon.x;
 	cyl_center.y = cylon.y;
@@ -29,13 +81,19 @@ void		check_t(double *t, t_cylinder cylon, t_ray ray)
 	ray_orig.x = ray.origin.x;
 	ray_orig.y = ray.origin.y;
 	ray_orig.z = ray.origin.z;
-
+	radius = cylon.diameter/2;
 	p2 = ft_sum_vect(cyl_center, ft_product_vect_scalar(cyl_normal, cylon.height));
 	q = ft_sum_vect(ray_orig, ft_product_vect_scalar(ray.direction, *t));
-	if (ft_dot_product_vect(cyl_normal, ft_rest_vect(q, cyl_center)) <= 0)
-		*t = -1;
-	if (ft_dot_product_vect(cyl_normal, ft_rest_vect(q, p2)) >= 0)
-		*t = -1;
+	t2= caps_intersection(ray, cyl_center, cyl_normal, p2, radius);
+	if ( t2 == -1)
+	{
+		if (ft_dot_product_vect(cyl_normal, ft_rest_vect(q, cyl_center)) <= 0)
+			*t = -1;
+		if (ft_dot_product_vect(cyl_normal, ft_rest_vect(q, p2)) >= 0)
+			*t = -1;
+	}else
+		*t = t2;
+	(void)radius;
 }
 
 void		swap_doubles(double *a, double *b)
