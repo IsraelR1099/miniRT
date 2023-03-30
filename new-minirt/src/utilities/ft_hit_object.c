@@ -80,9 +80,11 @@ static void	ft_hit_cyl(t_object *tmp, t_world *world, t_ray *ray, t_shaderec *sh
 {
 	t_cylinder	*cylon;
 	double		t;
-	
+
 	(void)world;
 	cylon = (t_cylinder *)tmp;
+	//hauriem de normalitzar els punts normals del cilindre?? aixi com tots
+	//ft_normalize_vect_points(cylon);
 	t = ft_check_cylon(*cylon, *ray);
 	if (t != 0 && t < shade->t)
 	{

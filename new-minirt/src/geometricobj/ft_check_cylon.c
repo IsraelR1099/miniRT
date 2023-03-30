@@ -170,7 +170,7 @@ double	ft_check_cylon(t_cylinder cylon, t_ray ray)
 	double t0;
 	double t1;
 	double	t;
-
+	
 	t = 0;
 	if (!ft_get_cylon(&t0, &t1, cylon, ray))
 		return (0);
