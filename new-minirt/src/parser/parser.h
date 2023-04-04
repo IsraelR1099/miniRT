@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 09:40:54 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/24 11:55:12 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:36:11 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,17 +122,6 @@ typedef struct s_cylinder
 	t_object	*obj;
 }	t_cylinder;
 
-/*typedef struct s_win
-{
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	char	*addr;
-	int		b;
-	int		ll;
-	int		end;
-}	t_window;*/
-
 typedef struct s_vector
 {
 	double	x;
@@ -206,5 +195,5 @@ float		ft_ratio(char **ftoken, char *eftoken);
 float		ft_coord(char **ftoken, char *eftoken);
 float		ft_normal(char **ftoken, char *eftoken);
 float		ft_diameter(char **ftoken, char *eftoken);
-float		ft_height(char **ftoken, char *eftoken);
+
 #endif

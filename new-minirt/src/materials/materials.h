@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   world.h                                            :+:      :+:    :+:   */
+/*   materials.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 14:00:54 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/24 10:40:32 by irifarac         ###   ########.fr       */
+/*   Created: 2023/03/31 12:22:17 by irifarac          #+#    #+#             */
+/*   Updated: 2023/03/31 12:22:19 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORLD_H
-# define WORLD_H
+#ifndef MATERIALS_H
+# define MATERIALS_H
 
-# include "../cameras/cameras.h"
-# include "../window/window.h"
+# include "../brdf/brdf.h"
+# include "../maths/maths.h"
 # include "../world/world.h"
-# include "viewplane.h"
+# include "../utilities/shaderec.h"
+# include "../lights/lights.h"
+# include "../color/rgbcolor.h"
 
-typedef struct s_world
+typedef struct s_matte
 {
-	t_cameras	*camera;
-	t_window	*mlx;
-	t_object	*obj;
-	t_ambient	*amb;
-	t_vp		vp;
-	t_light		**lights;
-}	t_world;
+	t_lambertian	*ambient_brdf;
+	t_lambertian	*diffuse_brdf;
+	t_rgb			(* ft_shade)(t_world *world, t_shaderec *shade);
+}	t_matte;
 
-void	ft_set_world(t_ambient *amb, t_object *obj, t_world *world);
+t_rgb	ft_shade(t_world *world, t_shaderec *shade);
 #endif

@@ -25,7 +25,7 @@
 
 # define WIDTH 1080
 # define HEIGHT 720
-# define EPSILON 1e-4
+
 /*typedef struct	s_point2d
 {
 	double	x;

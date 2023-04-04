@@ -70,11 +70,6 @@ t_object	*ft_build_cylinder(t_object *obj, char *ftoken, char *eftoken)
 	cylinder->x_normal = ft_normal(&ftoken, eftoken);
 	cylinder->y_normal = ft_normal(&ftoken, eftoken);
 	cylinder->z_normal = ft_normal(&ftoken, eftoken);
-	cylinder->diameter = ft_diameter(&ftoken,eftoken);
-	cylinder->height = ft_height(&ftoken, eftoken);
-	cylinder->r = ft_color(&ftoken, eftoken);
-	cylinder->g = ft_color(&ftoken, eftoken);
-	cylinder->b = ft_color(&ftoken, eftoken);
 	cylinder->obj = obj;
 	return ((t_object *)cylinder);
 }

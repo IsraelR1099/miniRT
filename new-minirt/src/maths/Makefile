@@ -23,9 +23,7 @@ DEPENDS = $(patsubst %.c, %.d, $(SRC))
 #Carpetas
 OBJDIR = obj
 SRCDIR = ./
-SRC = ft_vector_operation.c\
-	ft_vector_operation2.c\
-	ft_scalar_operation.c
+SRC = ft_vector_operation.c
 OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)

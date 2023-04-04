@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cameras.h"
-/*
+
 static t_vector3d	ft_normalize(t_vector3d vector)
 {
 	double		magnitude;
@@ -24,7 +24,7 @@ static t_vector3d	ft_normalize(t_vector3d vector)
 	ret.z = vector.z / magnitude;
 	return (ret);
 }
-*/
+
 t_vector3d	ft_ray_direction(t_cameras *camera, t_point2d points)
 {
 	t_vector3d	dir_a;

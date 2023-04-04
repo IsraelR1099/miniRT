@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 09:40:23 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/24 11:08:41 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/03/31 11:42:26 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ size_t	ft_samplers(t_world *world, t_ray *ray, double c, double r)
 	world->vp.color.r /= num_samples;
 	world->vp.color.g /= num_samples;
 	world->vp.color.b /= num_samples;
-	return(world->vp.color.r << 16 | world->vp.color.g << 8 | world->vp.color.b);
+	return((int)world->vp.color.r << 16 | (int)world->vp.color.g << 8 | (int)world->vp.color.b);
 }

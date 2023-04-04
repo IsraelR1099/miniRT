@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   world.h                                            :+:      :+:    :+:   */
+/*   rgbcolor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 14:00:54 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/24 10:40:32 by irifarac         ###   ########.fr       */
+/*   Created: 2023/03/10 11:01:51 by irifarac          #+#    #+#             */
+/*   Updated: 2023/04/03 12:39:14 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORLD_H
-# define WORLD_H
+#ifndef RGBCOLOR_H
+# define RGBCOLOR_H
 
-# include "../cameras/cameras.h"
-# include "../window/window.h"
-# include "../world/world.h"
-# include "viewplane.h"
+# include <stdio.h>
 
-typedef struct s_world
+typedef struct s_rgbcolor
 {
-	t_cameras	*camera;
-	t_window	*mlx;
-	t_object	*obj;
-	t_ambient	*amb;
-	t_vp		vp;
-	t_light		**lights;
-}	t_world;
+	double	r;
+	double	g;
+	double	b;
+}	t_rgb;
 
-void	ft_set_world(t_ambient *amb, t_object *obj, t_world *world);
+t_rgb	ft_rgb_scalar_product(t_rgb color, double scalar);
+t_rgb	ft_rgb_sum(t_rgb first, t_rgb second);
+t_rgb	ft_clamp_color(t_rgb light_color);
+t_rgb	ft_rgb_product_vect(t_rgb first, t_rgb second);
 #endif

@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   world.h                                            :+:      :+:    :+:   */
+/*   brdf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 14:00:54 by irifarac          #+#    #+#             */
-/*   Updated: 2023/03/24 10:40:32 by irifarac         ###   ########.fr       */
+/*   Created: 2023/03/31 10:20:26 by irifarac          #+#    #+#             */
+/*   Updated: 2023/04/03 13:05:09 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORLD_H
-# define WORLD_H
+#ifndef BRDF_H
+# define BRDF_H
 
-# include "../cameras/cameras.h"
-# include "../window/window.h"
-# include "../world/world.h"
-# include "viewplane.h"
+# include "../color/rgbcolor.h"
+# include "../utilities/shaderec.h"
+# include "../maths/maths.h"
 
-typedef struct s_world
+typedef struct s_lambertian
 {
-	t_cameras	*camera;
-	t_window	*mlx;
-	t_object	*obj;
-	t_ambient	*amb;
-	t_vp		vp;
-	t_light		**lights;
-}	t_world;
+	float	kd;
+	t_rgb	color;
+}	t_lambertian;
 
-void	ft_set_world(t_ambient *amb, t_object *obj, t_world *world);
+void	ft_brdf(t_rgb *total_light, t_shaderec *shade, t_rgb point_light, double dotwi);
 #endif
