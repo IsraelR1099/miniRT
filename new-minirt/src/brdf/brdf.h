@@ -23,5 +23,6 @@ typedef struct s_lambertian
 	t_rgb	color;
 }	t_lambertian;
 
-void	ft_brdf(t_rgb *total_light, t_shaderec *shade, t_rgb point_light, double dotwi);
+t_rgb	ft_brdf(t_rgb lights[2], t_shaderec *shade, t_vector3d dir[2], double dotwi);
+t_rgb	ft_rho(t_shaderec *shade, t_rgb color); // reflectance or albedo function kd * cd
 #endif
