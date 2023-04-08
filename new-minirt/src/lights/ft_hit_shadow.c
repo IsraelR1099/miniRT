@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_hit_shadow.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/06 09:59:19 by irifarac          #+#    #+#             */
+/*   Updated: 2023/04/07 13:47:16 by irifarac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lights.h"
 
 static bool	ft_hit_sph(t_object *tmp, t_ray ray, double t_min)
@@ -78,6 +90,6 @@ bool	ft_hit_shadow(t_ray ray, t_world *world, double t)
 		if (ret == true)
 			return (true);
 		tmp = ft_advance(tmp);
-	 }
-	 return (ret);
+	}
+	return (ret);
 }

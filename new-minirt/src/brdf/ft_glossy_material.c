@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rgbcolor.h                                         :+:      :+:    :+:   */
+/*   ft_glossy_material.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 11:01:51 by irifarac          #+#    #+#             */
-/*   Updated: 2023/04/06 10:23:40 by irifarac         ###   ########.fr       */
+/*   Created: 2023/04/07 09:53:21 by irifarac          #+#    #+#             */
+/*   Updated: 2023/04/07 13:12:51 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RGBCOLOR_H
-# define RGBCOLOR_H
+#include "brdf.h"
 
-# include <stdio.h>
-
-typedef struct s_rgbcolor
+t_rgb	ft_f_phong(t_shaderec *shade, t_vector3d dir[2], t_rgb point_light,
+double dotwi)
 {
-	double	r;
-	double	g;
-	double	b;
-}	t_rgb;
+	t_rgb	f;
+	t_rgb	f_diffuse;
+	t_rgb	f_specular;
+	t_rgb	sum_diff_spec;
 
-t_rgb	ft_rgb_scalar_product(t_rgb color, double scalar);
-t_rgb	ft_rgb_sum(t_rgb first, t_rgb second);
-t_rgb	ft_max_to_one(t_rgb light_color);
-t_rgb	*ft_clamp_to_color(t_rgb *light_color);
-t_rgb	ft_rgb_product_vect(t_rgb first, t_rgb second);
-#endif
+	f_diffuse = ft_f_diffuse(shade, shade->colour);
+	f_specular = ft_f_specular(shade, dir, point_light, dotwi);
+	sum_diff_spec = ft_rgb_sum(f_diffuse, f_specular);
+	f = ft_rgb_scalar_product(sum_diff_spec, dotwi);
+	return (f);
+}
