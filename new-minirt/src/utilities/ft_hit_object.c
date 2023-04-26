@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 09:57:35 by irifarac          #+#    #+#             */
-/*   Updated: 2023/04/07 13:58:09 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:17:57 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,29 @@ static t_object	*ft_advance(t_object *tmp)
 static void	ft_hit_cyl(t_object *tmp, t_world *world, t_ray *ray,
 t_shaderec *shade)
 {
-	(void)tmp;
+	
+	t_cylinder		*cylon;
+	t_normal	cyl_normal;
+	double		t;
+
 	(void)world;
-	(void)ray;
-	(void)shade;
+	cylon = (t_cylinder *)tmp;
+	t = ft_check_cylon(*cylon, *ray);
+	if (t != 0 && t < shade->t)
+	{
+		cyl_normal.x = cylon->x_normal;
+		cyl_normal.y = cylon->y_normal;
+		cyl_normal.z = cylon->z_normal;
+		shade->hit_object = true;
+		shade->ray = *ray;
+		shade->normal_hit = cyl_normal;
+		shade->t = t;
+		shade->colour.r = cylon->r;
+		shade->colour.g = cylon->g;
+		shade->colour.b = cylon->b;
+		shade->type = cylon->type;
+		shade->hit_point = ft_hit_point(ray, t);
+	}
 }
 
 t_shaderec	*ft_hit_objects(t_object *obj, t_world *world, t_ray *ray,
