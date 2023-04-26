@@ -6,7 +6,7 @@
 #    By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 10:07:31 by irifarac          #+#    #+#              #
-#    Updated: 2023/03/10 13:02:37 by irifarac         ###   ########.fr        #
+#    Updated: 2023/04/26 11:34:16 by msoler-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCDIR = ./
 SRC = ft_lights.c \
 		ft_sphere.c \
 		ft_hit_shadow.c \
+		ft_cylon.c \
 		ft_plane.c
 OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
 
