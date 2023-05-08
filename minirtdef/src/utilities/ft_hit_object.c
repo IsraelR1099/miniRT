@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 09:57:35 by irifarac          #+#    #+#             */
-/*   Updated: 2023/05/08 11:25:50 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/05/08 12:46:53 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ t_shaderec *shade)
 static void	ft_hit_cyl(t_object *tmp, t_world *world, t_ray *ray,
 t_shaderec *shade)
 {
-	t_cylinder		*cylon;
-	t_normal	normal_cylon;
+	t_cylinder	*cylon;
 	double		t;
 	
 	(void)world;
@@ -72,12 +71,9 @@ t_shaderec *shade)
 	t = ft_check_cylon(*cylon, *ray);
 	if (t != 0 && t < shade->t)
 	{
-		normal_cylon.x = cylon->x_normal;
-		normal_cylon.y = cylon->y_normal;
-		normal_cylon.z = cylon->z_normal;
 		shade->hit_object = true;
 		shade->ray = *ray;
-		shade->normal_hit = normal_cylon;
+		shade->normal_hit = ft_vect_normal_cyl(cylon, shade->hit_point);
 		shade->t = t;
 		shade->colour.r = cylon->r;
 		shade->colour.g = cylon->g;
@@ -133,7 +129,5 @@ t_shaderec *shade)
 			break ;
 		tmp = ft_advance(tmp);
 	}
-	//if (shade->hit_object == true)
-	//	printf("salgo de hit obj y obj es %d\n", shade->type);
 	return (shade);
 }
