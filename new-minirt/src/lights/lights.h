@@ -6,7 +6,11 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 10:09:09 by irifarac          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/04/26 12:29:29 by irifarac         ###   ########.fr       */
+=======
+/*   Updated: 2023/04/26 11:34:46 by msoler-e         ###   ########.fr       */
+>>>>>>> 78ee1aae8ef5775aa323eed3a29629323a6324bd
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +36,10 @@ double		ft_hit_sphere(t_sphere *sphere, t_ray ray);
 double		ft_hit_plane(t_plane *plane, t_ray ray);
 double		ft_hit_disk(t_disk *disk, t_ray ray);
 bool		ft_in_shadow(t_ray shadow_ray, t_shaderec *shade, t_light *light);
+<<<<<<< HEAD
 t_object	*ft_advance(t_object *tmp);
 
+=======
+double		ft_check_cylon(t_cylinder cylon, t_ray ray);
+>>>>>>> 78ee1aae8ef5775aa323eed3a29629323a6324bd
 #endif

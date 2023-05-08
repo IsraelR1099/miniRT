@@ -6,7 +6,11 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 09:57:35 by irifarac          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/05 10:45:19 by irifarac         ###   ########.fr       */
+=======
+/*   Updated: 2023/04/26 12:17:57 by msoler-e         ###   ########.fr       */
+>>>>>>> 78ee1aae8ef5775aa323eed3a29629323a6324bd
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +67,29 @@ t_shaderec *shade)
 static void	ft_hit_cyl(t_object *tmp, t_world *world, t_ray *ray,
 t_shaderec *shade)
 {
-	(void)tmp;
+	
+	t_cylinder		*cylon;
+	t_normal	cyl_normal;
+	double		t;
+
 	(void)world;
-	(void)ray;
-	(void)shade;
+	cylon = (t_cylinder *)tmp;
+	t = ft_check_cylon(*cylon, *ray);
+	if (t != 0 && t < shade->t)
+	{
+		cyl_normal.x = cylon->x_normal;
+		cyl_normal.y = cylon->y_normal;
+		cyl_normal.z = cylon->z_normal;
+		shade->hit_object = true;
+		shade->ray = *ray;
+		shade->normal_hit = cyl_normal;
+		shade->t = t;
+		shade->colour.r = cylon->r;
+		shade->colour.g = cylon->g;
+		shade->colour.b = cylon->b;
+		shade->type = cylon->type;
+		shade->hit_point = ft_hit_point(ray, t);
+	}
 }
 
 static void	ft_hit_disk(t_object *tmp, t_world *world, t_ray *ray,

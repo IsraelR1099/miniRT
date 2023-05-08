@@ -6,7 +6,11 @@
 #    By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 10:07:31 by irifarac          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/04/26 12:27:04 by irifarac         ###   ########.fr        #
+=======
+#    Updated: 2023/04/26 11:34:16 by msoler-e         ###   ########.fr        #
+>>>>>>> 78ee1aae8ef5775aa323eed3a29629323a6324bd
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +31,14 @@ SRCDIR = ./
 SRC = ft_lights.c \
 		ft_sphere.c \
 		ft_hit_shadow.c \
+<<<<<<< HEAD
 		ft_plane.c \
 		ft_utils.c \
 		ft_disk.c
+=======
+		ft_cylon.c \
+		ft_plane.c
+>>>>>>> 78ee1aae8ef5775aa323eed3a29629323a6324bd
 OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
