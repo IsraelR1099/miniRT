@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hit_point.c                                     :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 11:11:16 by irifarac          #+#    #+#             */
-/*   Updated: 2023/04/28 12:35:19 by irifarac         ###   ########.fr       */
+/*   Created: 2023/05/01 09:51:56 by irifarac          #+#    #+#             */
+/*   Updated: 2023/05/01 09:55:10 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shaderec.h"
+#include "world.h"
 
-t_point3d	ft_hit_point(t_ray *ray, double t)
+void	ft_set_init(t_light **lights, t_ambient *amb)
 {
-	t_vector3d	b;
-	t_vector3d	sum;
-	t_vector3d	origin;
-	t_point3d	ret;
+	int	i;
+	int	count;
 
-	origin.x = ray->origin.x;
-	origin.y = ray->origin.y;
-	origin.z = ray->origin.z;
-	b = ft_product_vect_scalar(ray->direction, t);
-	sum = ft_sum_vect(origin, b);
-	ret.x = sum.x;
-	ret.y = sum.y;
-	ret.z = sum.z;
-	return (ret);
+	i = 0;
+	count = ft_count_light(amb);
+	while (i <= count)
+	{
+		lights[i] = NULL;
+		i++;
+	}
 }

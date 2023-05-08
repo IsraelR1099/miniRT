@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:21:31 by irifarac          #+#    #+#             */
-/*   Updated: 2023/04/07 13:48:36 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:44:55 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static char	*ft_delnul(char **ret, int len)
 	if (!str)
 		exit(ft_error("Malloc error", -1));
 	i = 0;
-	j = 0;
 	k = 0;
 	while (ret[i])
 	{
+		j = 0;
 		while (ret[i][j])
 		{
 			str[k] = ret[i][j];
@@ -37,7 +37,6 @@ static char	*ft_delnul(char **ret, int len)
 			k++;
 			j++;
 		}
-		j = 0;
 		i++;
 	}
 	str[k] = '\0';
@@ -64,6 +63,23 @@ static int	ft_len(int fd, int *bytes)
 	return (len);
 }
 
+static void	ft_free(char **str)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		tmp = str[i];
+		free(tmp);
+		i++;
+	}
+	free(str);
+}
+
+
+
 char	*ft_lines(char *str, int fd)
 {
 	char	**ret;
@@ -81,13 +97,16 @@ char	*ft_lines(char *str, int fd)
 	if (!ret)
 		exit(ft_error("Malloc error", -1));
 	i = 0;
+	printf("len es %d\n", len);
 	while (len--)
 	{
 		ret[i] = ft_get_next_line(fd);
 		i++;
 	}
+	printf("i es %d\n", i);
 	ret[i] = NULL;
 	new_str = ft_delnul(ret, bytes);
+	ft_free(ret);
 	return (new_str);
 }
 

@@ -5,34 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/07 12:58:41 by irifarac          #+#    #+#             */
-/*   Updated: 2023/04/07 13:02:30 by irifarac         ###   ########.fr       */
+/*   Created: 2023/04/26 12:12:14 by irifarac          #+#    #+#             */
+/*   Updated: 2023/04/26 12:32:19 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "brdf.h"
+#include "lights.h"
 
-t_rgb	ft_calc_color(t_shaderec *shade, t_rgb point_light, double r_wo)
+static t_object	*ft_help(t_object *tmp)
 {
-	t_rgb	ret;
-	double	k_d;
+	t_disk	*disk;
 
-	k_d = 0.6;
-	if ((k_d + shade->kd) > 1)
-		k_d = 1;
-	ret = ft_rgb_scalar_product(point_light, k_d * pow(r_wo, 25));
-	ret = ft_rgb_scalar_product(ret, k_d);
-	return (ret);
+	disk = (t_disk *)tmp;
+	return (disk->obj);
 }
 
-t_vector3d	ft_product(t_shaderec *shade, double dotwi)
+t_object	*ft_advance(t_object *tmp)
 {
-	t_vector3d	normal_hit;
-	t_vector3d	product;
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cyl;
 
-	normal_hit.x = shade->normal_hit.x;
-	normal_hit.y = shade->normal_hit.y;
-	normal_hit.z = shade->normal_hit.z;
-	product = ft_product_vect_scalar(normal_hit, 2 * dotwi);
-	return (product);
+	if (!tmp)
+		return (NULL);
+	if (tmp->type == sp)
+	{
+		sphere = (t_sphere *)tmp;
+		tmp = sphere->obj;
+	}
+	else if (tmp->type == pl)
+	{
+		plane = (t_plane *)tmp;
+		tmp = plane->obj;
+	}
+	else if (tmp->type == cy)
+	{
+		cyl = (t_cylinder *)tmp;
+		tmp = cyl->obj;
+	}
+	else if (tmp->type == di)
+		tmp = ft_help(tmp);
+	return (tmp);
 }

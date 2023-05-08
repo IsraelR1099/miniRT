@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 09:40:54 by irifarac          #+#    #+#             */
-/*   Updated: 2023/04/07 11:28:01 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:14:08 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
+# include <limits.h>
 
 # define BUFFER_SIZE 1
 
@@ -28,7 +29,8 @@ enum	e_ident
 	L,
 	sp,
 	pl,
-	cy
+	cy,
+	di
 };
 
 typedef struct s_ambient
@@ -122,6 +124,22 @@ typedef struct s_cylinder
 	t_object	*obj;
 }	t_cylinder;
 
+typedef struct s_disk
+{
+	int			type;
+	float		x;
+	float		y;
+	float		z;
+	int			x_normal;
+	int			y_normal;
+	int			z_normal;
+	float		radius;
+	double		r;
+	double		g;
+	double		b;
+	t_object	*obj;
+}	t_disk;
+
 typedef struct s_vector
 {
 	double	x;
@@ -166,10 +184,13 @@ t_object	*ft_parseobj(char *str);
 t_object	*ft_build_sphere(t_object *obj, char *ftoken, char *eftoken);
 t_object	*ft_build_plane(t_object *obj, char *ftoken, char *eftoken);
 t_object	*ft_build_cylinder(t_object *obj, char *ftoken, char *eftoken);
+t_object	*ft_build_disk(t_object *obj, char *ftoken, char *eftoken);
 //Errors
 int			ft_check_error(char **str);
 int			ft_error(const char *str, int ret);
 int			ft_check_grammar(int fd);
+int			ft_check_id(char *str);
+int			ft_leftovers(char *ftoken, char *eftoken);
 //Utils
 int			ft_strcmp(const char *str1, const char *str2);
 int			ft_strncmp(const char *str1, const char *str2, size_t number);
