@@ -6,7 +6,7 @@
 #    By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 09:40:37 by irifarac          #+#    #+#              #
-#    Updated: 2023/04/26 11:00:27 by msoler-e         ###   ########.fr        #
+#    Updated: 2023/05/08 10:57:54 by msoler-e         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,8 @@ SRC = src/main.c \
 		src/render/ft_init.c \
 		src/render/ft_render.c \
 		src/utilities/ft_find.c \
-		src/utilities/ft_handler.c
+		src/utilities/ft_handler.c \
+		src/render/ft_free.c 
 
 #OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:%.c=o))
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
