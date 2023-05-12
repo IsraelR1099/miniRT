@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:27:51 by irifarac          #+#    #+#             */
-/*   Updated: 2023/04/26 10:37:23 by irifarac         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:31:41 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@
 double	ft_check_sphere(t_cameras *camera, t_sphere *sphere, t_ray *ray);
 double	ft_check_plane(t_cameras *camera, t_plane *plnae, t_ray *ray);
 double	ft_check_disk(t_cameras *camera, t_disk *disk, t_ray *ray);
-
+double	ft_check_cylon(t_cylinder cylon, t_ray ray);
 #endif
