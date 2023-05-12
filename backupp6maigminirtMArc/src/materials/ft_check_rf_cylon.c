@@ -6,13 +6,12 @@
 /*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:55:59 by msoler-e          #+#    #+#             */
-/*   Updated: 2023/05/10 13:29:45 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:44:42 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "materials.h"
 #define EPSILON 1e-4
-
 
 double	caps_intersection_return(double id[2],
 	t_ray ray, t_cylinder cylon, t_vector3d c2)
@@ -40,7 +39,6 @@ double	caps_intersection_return(double id[2],
 		return (id[0]);
 	else if (id[1] != -1 && distance(ip2, c2) <= cylon.diameter / 2)
 		return (id[1]);
-	//no tinc clar hagi de ser -1)
 	return (-1);
 }
 
@@ -89,36 +87,8 @@ void	check_t(double *t, t_cylinder cylon, t_ray ray)
 		*t = caps_intersection(ray, cylon, p2);
 }
 
-int	solve_quadratic(double quadratic[3], double *x0, double *x1)
-{
-	double	discr;
-	double	q;
-
-	discr = pow(quadratic[1], 2) - 4 * quadratic[0] * quadratic[2];
-	if (discr < 0)
-		return (0);
-	else if (discr == 0)
-	{
-		*x0 = -0.5 * quadratic[1] / quadratic[0];
-		*x1 = -0.5 * quadratic[1] / quadratic[0];
-	}
-	else
-	{
-		if (quadratic[1] > 0)
-			q = -1 * (quadratic[1] + sqrt(discr)) / 2;
-		else
-			q = -1 * (quadratic[1] - sqrt(discr)) / 2;
-		*x0 = q / quadratic[0];
-		*x1 = quadratic[2] / q;
-	}
-	if (*x0 > *x1)
-		swap_doubles(x0, x1);
-	return (1);
-}
-
 double	ft_get_cylon(double *t0, double *t1, t_cylinder cylon, t_ray ray)
 {
-	t_vector3d	a_sqrt;
 	t_vector3d	right;
 	t_vector3d	cyl_normal;
 	t_vector3d	cyl_center;
@@ -127,14 +97,13 @@ double	ft_get_cylon(double *t0, double *t1, t_cylinder cylon, t_ray ray)
 
 	ft_cyl_center_normal_rad(cylon, &cyl_normal, &cyl_center);
 	ft_ray_origin(ray, &ray_orig);
-	a_sqrt = ft_rest_vect(ray.direction, ft_product_vect_scalar(cyl_normal,
-				ft_dot_product_vect(ray.direction, cyl_normal)));
-	quadratic[0] = ft_dot_product_vect(a_sqrt, a_sqrt);
+	quadratic[0] = ft_dot_product_vect(a_sqrt(ray, cyl_normal),
+			a_sqrt(ray, cyl_normal));
 	right = ft_rest_vect(ft_rest_vect(ray_orig, cyl_center),
 			ft_product_vect_scalar(cyl_normal,
 				ft_dot_product_vect(ft_rest_vect(ray_orig,
 						cyl_center), cyl_normal)));
-	quadratic[1] = 2 * ft_dot_product_vect(a_sqrt, right);
+	quadratic[1] = 2 * ft_dot_product_vect(a_sqrt(ray, cyl_normal), right);
 	quadratic[2] = ft_dot_product_vect(right, right)
 		- ((cylon.diameter / 2) * (cylon.diameter / 2));
 	if (!solve_quadratic(quadratic, t0, t1))
@@ -146,9 +115,7 @@ double	ft_check_rf_cylon(t_cylinder cylon, t_ray ray)
 {
 	double	t0;
 	double	t1;
-	double	t;
 
-	t = 0;
 	if (!ft_get_cylon(&t0, &t1, cylon, ray))
 		return (0);
 	if (t0 > 0)
@@ -157,19 +124,5 @@ double	ft_check_rf_cylon(t_cylinder cylon, t_ray ray)
 		check_t(&t1, cylon, ray);
 	if (t0 < 0 && t1 < 0)
 		return (0);
-	if (t1 < t0)
-	{
-		if (t1 > 0)
-			t = t1;
-		else
-			t = t0;
-	}
-	else
-	{
-		if (t0 > 0)
-			t = t0;
-		else
-			t = t1;
-	}
-	return (t);
+	return (ft_return( t1, t0));
 }
