@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:22:17 by irifarac          #+#    #+#             */
-/*   Updated: 2023/05/12 11:37:10 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:20:21 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,20 @@ double		ft_check_rf_sphere(t_sphere *sphere, t_ray *ray);
 double		ft_check_rf_plane(t_plane *plane, t_ray *ray);
 double		ft_check_rf_disk(t_disk *disk, t_ray *ray);
 double		ft_check_rf_cylon(t_cylinder cylon, t_ray ray);
+//utils check cylon
+void		ft_cyl_center_normal_rad(t_cylinder cylon, t_vector3d *cyl_normal,
+				t_vector3d *cyl_center);
+void		ft_ray_origin(t_ray ray, t_vector3d *ray_orig);
+double		distance(const t_vector3d p1, const t_vector3d p2);
+double		solve_plane(t_vector3d o, t_vector3d d,
+				t_vector3d p_p, t_vector3d p_nv);
+void		swap_doubles(double *a, double *b);
+t_vector3d	a_sqrt(t_ray ray, t_vector3d cyl_normal);
+int			solve_quadratic(double quadratic[3], double *x0, double *x1);
+double		ft_return(double t1, double t0);
+
 //Utils
 t_vector3d	ft_normal_vector3d(t_shaderec *shade);
 t_vector3d	ft_dir_wo(t_shaderec *shade);
+t_normal	ft_vect_normal_rf_cyl(t_cylinder *cylon, t_point3d hit_point);
 #endif
