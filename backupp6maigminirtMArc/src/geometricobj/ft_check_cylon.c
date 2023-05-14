@@ -52,13 +52,19 @@ double	caps_intersection(t_ray ray, t_vector3d cyl_center, t_vector3d cyl_normal
 	{
 		ip1 = ft_sum_vect(ray_orig, ft_product_vect_scalar(ray.direction, id1));
 		ip2 = ft_sum_vect(ray_orig, ft_product_vect_scalar(ray.direction, id2));
-		if ((id1 != -1 && distance(ip1, cyl_center) <= radius) && (id2 != -1 && distance(ip2, c2) <= radius))
-			return (id1 < id2 ? id1 : id2);
-		else if (id1 != -1 && distance(ip1, cyl_center) <= radius)
+		//canviat ja que nomes verificaven la interseccio del raig a la 2 tapa si la primera era ok ara fa les dues
+		
+		if (id1 != -1 && distance(ip1, cyl_center) <= radius)
+		{
+			if (id1 != -1 && distance(ip1, c2) <= radius)
+				return (id1 < id2 ? id1 : id2);
+			else 
 			return (id1);
+		}
 		else if (id2 != -1 && distance(ip2, c2) <= radius)
 			return (id2);
 	}
+	//canviat
 	return (-1);
 }
 
