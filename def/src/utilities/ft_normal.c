@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 09:49:08 by irifarac          #+#    #+#             */
-/*   Updated: 2023/05/12 11:52:00 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:02:01 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,31 @@ t_vector3d	ft_normalize(t_vector3d vector)
 
 t_normal	ft_vect_normal_cyl(t_cylinder *cylon, t_point3d hit_point)
 {
+
+	 t_vector3d  point;
+      t_vector3d  hit;
+      t_vector3d  center;
+      t_normal    ret;
+      double      radius;
+
+      center.x = cylon->x;
+     center.y = cylon->y;
+      center.z = cylon->z;
+      hit.x = hit_point.x;
+     hit.y = hit_point.y;
+      hit.z = hit_point.z;
+      point = ft_rest_vect(hit, center);
+      radius = cylon->diameter / 2;
+      point.x = point.x * radius;
+      point.y = 0.0;
+      point.z = point.z * radius;
+      point = ft_normalize(point);
+	  ret.x = point.x;
+      ret.y = point.y;
+     ret.z = point.z;
+	  return (ret);
+	 
+/*
 	t_vector3d	center_cyl;
 	t_vector3d	hit_p;
 	t_vector3d	rest;
@@ -78,4 +103,5 @@ t_normal	ft_vect_normal_cyl(t_cylinder *cylon, t_point3d hit_point)
 	ret.y *= -1;
 	ret.z *= -1;
 	return (ret);
+*/
 }

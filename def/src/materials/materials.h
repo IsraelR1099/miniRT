@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:22:17 by irifarac          #+#    #+#             */
-/*   Updated: 2023/05/12 13:20:21 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:45:27 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,4 @@ double		ft_return(double t1, double t0);
 //Utils
 t_vector3d	ft_normal_vector3d(t_shaderec *shade);
 t_vector3d	ft_dir_wo(t_shaderec *shade);
-t_normal	ft_vect_normal_rf_cyl(t_cylinder *cylon, t_point3d hit_point);
 #endif
