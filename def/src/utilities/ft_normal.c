@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 09:49:08 by irifarac          #+#    #+#             */
-/*   Updated: 2023/05/17 13:02:01 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:47:35 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,36 @@ t_vector3d	ft_normalize(t_vector3d vector)
 
 t_normal	ft_vect_normal_cyl(t_cylinder *cylon, t_point3d hit_point)
 {
+/*
+	t_normal normal;
+
+
+if (hit_point.y >= (cylon->y + cylon->height / 2)) {
+    normal.x = 0;
+	normal.y = 1;
+	normal.z = 0;
+	//normal cap amunt
+	return(normal);
+} else if (hit_point.y <= (cylon->y - cylon->height / 2)) {
+    normal.x = 0;
+	normal.y = -1;
+	normal.z = 0;
+	// Normal cap avall
+	return(normal);
+}
+
+    // Calcula las componentes x y z de la normal en el punto de intersección
+    normal.x = hit_point.x - cylon->x;
+    normal.y = 0.0; // La normal de un cilindro es perpendicular a su eje, que es paralelo al ej:
+    normal.z = hit_point.z - cylon->z;
+    // Normaliza el vector de la normal
+    float magnitude = sqrt(normal.x * normal.x + normal.y * normal.y + normal.z * normal.z);
+    normal.x /= magnitude;
+    normal.y /= magnitude;
+    normal.z /= magnitude;
+    return (normal);
+}
+*/
 
 	 t_vector3d  point;
       t_vector3d  hit;
@@ -63,6 +93,19 @@ t_normal	ft_vect_normal_cyl(t_cylinder *cylon, t_point3d hit_point)
       t_normal    ret;
       double      radius;
 
+if (hit_point.y >= (cylon->y + cylon->height / 2)) {
+    ret.x = 0;
+	ret.y = 1;
+	ret.z = 0;
+	//normal cap amunt
+	return(ret);
+} else if (hit_point.y <= (cylon->y - cylon->height / 2)) {
+    ret.x = 0;
+	ret.y = -1;
+	ret.z = 0;
+	// Normal cap avall
+	return(ret);
+}
       center.x = cylon->x;
      center.y = cylon->y;
       center.z = cylon->z;
@@ -79,8 +122,9 @@ t_normal	ft_vect_normal_cyl(t_cylinder *cylon, t_point3d hit_point)
       ret.y = point.y;
      ret.z = point.z;
 	  return (ret);
-	 
-/*
+}
+/*	 
+
 	t_vector3d	center_cyl;
 	t_vector3d	hit_p;
 	t_vector3d	rest;
@@ -103,5 +147,7 @@ t_normal	ft_vect_normal_cyl(t_cylinder *cylon, t_point3d hit_point)
 	ret.y *= -1;
 	ret.z *= -1;
 	return (ret);
+
+	}
 */
-}
+
