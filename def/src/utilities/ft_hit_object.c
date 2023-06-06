@@ -6,7 +6,7 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 09:57:35 by irifarac          #+#    #+#             */
-/*   Updated: 2023/05/12 13:17:00 by msoler-e         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:58:28 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ t_shaderec *shade)
 	{
 		shade->hit_object = true;
 		shade->ray = *ray;
-		shade->normal_hit = ft_vect_normal_cyl(cylon, shade->hit_point);
 		shade->t = t;
 		shade->colour.r = cylon->r;
 		shade->colour.g = cylon->g;
 		shade->colour.b = cylon->b;
 		shade->type = cylon->type;
 		shade->hit_point = ft_hit_point(ray, t);
+		shade->normal_hit = ft_vect_normal_cyl(cylon, shade->hit_point);
 	}
 }
 
